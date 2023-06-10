@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>unityAudio - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/unityaudio/</link>
+        <description>unityAudio - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 13 Oct 2022 10:13:50 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/unityaudio/" rel="self" type="application/rss+xml" /><item>
+    <title>Unity音频优化Tip</title>
+    <link>http://www.iubucuoo.com/posts/untiy3d_unityaudiodo/</link>
+    <pubDate>Thu, 13 Oct 2022 10:13:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/untiy3d_unityaudiodo/</guid>
+    <description><![CDATA[尝试优化 Unity 音频]]></description>
+</item></channel>
+</rss>

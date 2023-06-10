@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>手动安装LNMP与wordpress - iubucuoo</title><meta name="Description" content="手动安装LNMP与wordpress"><meta property="og:title" content="手动安装LNMP与wordpress" />
+<meta property="og:description" content="手动安装LNMP与wordpress" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.iubucuoo.com/posts/website_lnmp_wordpress/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-12T19:33:57&#43;08:00" />
+<meta property="article:modified_time" content="2022-10-12T19:33:57&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="手动安装LNMP与wordpress"/>
+<meta name="twitter:description" content="手动安装LNMP与wordpress"/>
+<meta name="application-name" content="iubucuoo">
+<meta name="apple-mobile-web-app-title" content="iubucuoo"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://www.iubucuoo.com/posts/website_lnmp_wordpress/" /><link rel="prev" href="http://www.iubucuoo.com/posts/unity3d_stringbuilder/" /><link rel="next" href="http://www.iubucuoo.com/posts/website_nginx_order/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "手动安装LNMP与wordpress",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.iubucuoo.com\/posts\/website_lnmp_wordpress\/"
+        },"genre": "posts","keywords": "LNMP, Wordpress","wordcount":  2818 ,
+        "url": "http:\/\/www.iubucuoo.com\/posts\/website_lnmp_wordpress\/","datePublished": "2022-10-12T19:33:57+08:00","dateModified": "2022-10-12T19:33:57+08:00","publisher": {
+            "@type": "Organization",
+            "name": "iubucuoo"},"author": {
+                "@type": "Person",
+                "name": "iubucuoo"
+            },"description": "手动安装LNMP与wordpress"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/tools/"> 工具 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/iubucuoo" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/tools/" title="">工具</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/iubucuoo" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">手动安装LNMP与wordpress</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>iubucuoo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/buildwebsite/"><i class="far fa-folder fa-fw"></i>构建网站</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-10-12">2022-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2818 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/posts/website_lnmp_wordpress/" class="leancloud_visitors" data-flag-title="手动安装LNMP与wordpress">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#步骤1安装nginx">步骤1：安装Nginx</a></li>
+    <li><a href="#步骤2安装mysql">步骤2：安装MySQL</a></li>
+    <li><a href="#步骤3安装php">步骤3：安装PHP</a></li>
+    <li><a href="#步骤4配置nginx">步骤4：配置Nginx</a></li>
+    <li><a href="#步骤5配置mysql">步骤5：配置MySQL</a></li>
+    <li><a href="#步骤6配置php">步骤6：配置PHP</a></li>
+    <li><a href="#步骤7搭建wordpress网站">步骤7：搭建WordPress网站</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://www.alibabacloud.com/help/zh/doc-detail/173042.htm" target="_blank" rel="noopener noreffer">参考文章</a></p>
+<p><a href="https://help.aliyun.com/document_detail/184111.html" target="_blank" rel="noopener noreffer">参考文章2</a></p>
+<h2 id="步骤1安装nginx">步骤1：安装Nginx</h2>
+<p>因为本人早先已经装过nginx，所以采用的手动安装LNMP。</p>
+<ol>
+<li>
+<p>运行以下命令安装Nginx。</p>
+<p>本教程将选用Nginx 1.16.1版本。</p>
+<p><strong>说明</strong>  您可以访问<a href="http://nginx.org/packages/centos/8/x86_64/RPMS/" target="_blank" rel="noopener noreffer">Nginx官方安装包</a>获取适用于CentOS 8系统的多版本的Nginx安装包。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">dnf -y install http://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.16.1-1.el8.ngx.x86_64.rpm
+</code></pre></div></li>
+<li>
+<p>运行以下命令查看Nginx版本。</p>
+<pre><code class="language-undefined" data-lang="undefined">nginx -v
+</code></pre><p>查看版本结果如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">nginx version</span><span class="p">:</span><span class="w"> </span><span class="l">nginx/1.16.1</span><span class="w">
+</span></code></pre></div></li>
+</ol>
+<h2 id="步骤2安装mysql">步骤2：安装MySQL</h2>
+<ol>
+<li>
+<p>运行以下命令安装MySQL。</p>
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="nx">dnf</span> <span class="o">-</span><span class="nx">y</span> <span class="nx">install</span> <span class="kd">@mysql</span>
+</code></pre></div></li>
+<li>
+<p>运行以下命令查看MySQL版本。</p>
+<pre><code class="language-undefined" data-lang="undefined">mysql -V
+</code></pre><p>查看版本结果如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">mysql</span>  <span class="n">Ver</span> <span class="n">8</span><span class="o">.</span><span class="na">0</span><span class="o">.</span><span class="na">17</span> <span class="k">for</span> <span class="n">Linux</span> <span class="n">on</span> <span class="nf">x86_64</span> <span class="o">(</span><span class="n">Source</span> <span class="n">distribution</span><span class="o">)</span>
+</code></pre></div></li>
+</ol>
+<h2 id="步骤3安装php">步骤3：安装PHP</h2>
+<ol>
+<li>
+<p>运行以下命令添加并更新epel源。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">dnf</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="w">
+</span><span class="w"></span><span class="n">dnf</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">epel</span><span class="o">-</span><span class="n">release</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>运行以下命令删除缓存的无用软件包并更新软件源。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dnf</span> <span class="n">clean</span> <span class="nb">all</span>
+<span class="n">dnf</span> <span class="n">makecache</span>
+</code></pre></div></li>
+<li>
+<p>启用<code>php:7.3</code>模块。</p>
+<p><strong>说明</strong>  本示例使用<code>php:7.3</code>版本。如果您需要使用<code>PHP 7.4</code>版本，需要先安装remi源。remi源安装命令为dnf -y install <a href="https://rpms.remirepo.net/enterprise/remi-release-8.rpm">https://rpms.remirepo.net/enterprise/remi-release-8.rpm</a>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">dnf</span> <span class="nx">module</span> <span class="nx">enable</span> <span class="nx">php</span><span class="o">:</span><span class="mf">7.3</span>
+</code></pre></div></li>
+<li>
+<p>运行以下命令安装PHP相应的模块。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dnf</span> <span class="n">install</span> <span class="n">php</span> <span class="n">php</span><span class="o">-</span><span class="n">curl</span> <span class="n">php</span><span class="o">-</span><span class="n">dom</span> <span class="n">php</span><span class="o">-</span><span class="n">exif</span> <span class="n">php</span><span class="o">-</span><span class="n">fileinfo</span> <span class="n">php</span><span class="o">-</span><span class="n">fpm</span> <span class="n">php</span><span class="o">-</span><span class="n">gd</span> <span class="n">php</span><span class="o">-</span><span class="nb">hash</span> <span class="n">php</span><span class="o">-</span><span class="n">json</span> <span class="n">php</span><span class="o">-</span><span class="n">mbstring</span> <span class="n">php</span><span class="o">-</span><span class="n">mysqli</span> <span class="n">php</span><span class="o">-</span><span class="n">openssl</span> <span class="n">php</span><span class="o">-</span><span class="n">pcre</span> <span class="n">php</span><span class="o">-</span><span class="n">xml</span> <span class="n">libsodium</span>
+</code></pre></div></li>
+<li>
+<p>运行以下命令查看PHP版本。</p>
+<pre><code class="language-undefined" data-lang="undefined">php -v
+</code></pre><p>查看版本结果如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">PHP 7.3.5 (cli) (built</span><span class="p">:</span><span class="w"> </span><span class="l">Apr 30 2019 08:37:17) ( NTS )</span><span class="w">
+</span><span class="w"></span><span class="l">Copyright (c) 1997-2018 The PHP Group</span><span class="w">
+</span><span class="w"></span><span class="l">Zend Engine v3.3.5, Copyright (c) 1998-2018 Zend Technologies</span><span class="w">
+</span></code></pre></div></li>
+</ol>
+<h2 id="步骤4配置nginx">步骤4：配置Nginx</h2>
+<p>本人配置都配在/etc/nginx/nginx.conf内，直接修改当前配置的内容</p>
+<ol>
+<li>
+<p>运行以下命令打开默认配置文件。</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">vi</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">nginx</span><span class="p">.</span><span class="nx">conf</span>
+</code></pre></div></li>
+<li>
+<p>按i进入编辑模式。</p>
+</li>
+<li>
+<p>在<code>location</code>大括号内，修改以下内容。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">location / <span class="o">{</span>
+    <span class="c1">#将该路径替换为您的网站根目录。</span>
+    root   /usr/share/nginx/html1/wordpress<span class="p">;</span>
+    <span class="c1">#添加默认首页信息index.php。</span>
+    index  index.html index.htm index.php<span class="p">;</span>
+<span class="o">}</span>
+</code></pre></div></li>
+<li>
+<p>去掉被注释的<code>location ~ \.php$</code>大括号内容前的<code>#</code>，并修改大括号的内容。</p>
+<p>修改完成如下所示。</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">location</span> <span class="o">~</span> <span class="nx">\</span><span class="o">.</span><span class="nx">php</span><span class="err">$</span> <span class="p">{</span>
+    <span class="c1">#将该路径替换为您的网站根目录。
+</span><span class="c1"></span>    <span class="nx">root</span>           <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">share</span><span class="o">/</span><span class="nx">nginx</span><span class="o">/</span><span class="nx">html1</span><span class="o">/</span><span class="nx">wordpress</span><span class="p">;</span>
+    <span class="c1">#Nginx通过unix套接字与PHP-FPM建立联系，该配置与/etc/php-fpm.d/www.conf文件内的listen配置一致。
+</span><span class="c1"></span>    <span class="nx">fastcgi_pass</span>   <span class="nx">unix</span><span class="o">:/</span><span class="nx">run</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">fpm</span><span class="o">/</span><span class="nx">www</span><span class="o">.</span><span class="nx">sock</span><span class="p">;</span>
+    <span class="nx">fastcgi_index</span>  <span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="p">;</span>
+    <span class="c1">#将/scripts$fastcgi_script_name修改为$document_root$fastcgi_script_name。
+</span><span class="c1"></span>    <span class="nx">fastcgi_param</span>  <span class="nx">SCRIPT_FILENAME</span>  <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+    <span class="c1">#Nginx调用fastcgi接口处理PHP请求。
+</span><span class="c1"></span>    <span class="k">include</span>        <span class="nx">fastcgi_params</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>说明**  Nginx与PHP-FPM进程间通信方式有两种。</p>
+<ul>
+<li>TCP Socket：该方式能够通过网络，可用于跨服务器通信的场景。</li>
+<li>UNIX Domain Socket：该方式不能通过网络，只能用于同一服务器中通信的场景。</li>
+</ul>
+</li>
+<li>
+<p>按下Esc键，并输入<code>:wq</code>保存退出文件。</p>
+</li>
+<li>
+<p>运行以下命令启动Nginx服务。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">nginx</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>运行以下命令设置Nginx服务开机自启动。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">systemctl <span class="nb">enable</span> nginx
+</code></pre></div></li>
+</ol>
+<h2 id="步骤5配置mysql">步骤5：配置MySQL</h2>
+<ol>
+<li>
+<p>运行以下命令启动MySQL，并设置为开机自启动。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="c1">--now mysqld
+</span></code></pre></div></li>
+<li>
+<p>运行以下命令查看MySQL是否已启动。</p>
+<pre><code class="language-undefined" data-lang="undefined">systemctl status mysqld
+</code></pre><p>查看返回结果中<code>Active: active (running)</code>表示已启动。</p>
+</li>
+<li>
+<p>运行以下命令执行MySQL安全性操作并设置密码。</p>
+<pre><code class="language-undefined" data-lang="undefined">mysql_secure_installation
+</code></pre><p>命令运行后，根据命令行提示执行如下操作。</p>
+<ol>
+<li>
+<p>输入Y并回车开始相关配置。</p>
+</li>
+<li>
+<p>选择密码验证策略强度，输入2并回车。</p>
+<p>策略0表示低，1表示中，2表示高。建议您选择高强度的密码验证策略。</p>
+</li>
+<li>
+<p>设置MySQL的新密码并确认。</p>
+<p>本示例设置密码<code>PASSword123！</code>。</p>
+</li>
+<li>
+<p>输入Y并回车继续使用提供的密码。</p>
+</li>
+<li>
+<p>输入Y并回车移除匿名用户。</p>
+</li>
+<li>
+<p>设置是否允许远程连接MySQL。</p>
+<ul>
+<li>不需要远程连接时，输入Y并回车。</li>
+<li>需要远程连接时，输入N或其他任意非Y的按键，并回车。</li>
+</ul>
+</li>
+<li>
+<p>输入Y并回车删除<code>test</code>库以及对<code>test</code>库的访问权限。</p>
+</li>
+<li>
+<p>输入Y并回车重新加载授权表。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="步骤6配置php">步骤6：配置PHP</h2>
+<ol>
+<li>
+<p>修改PHP配置文件。</p>
+<ol>
+<li>
+<p>运行以下命令打开配置文件。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">vi /etc/php-fpm.d/www.conf
+</code></pre></div></li>
+<li>
+<p>按i进入编辑模式。</p>
+</li>
+<li>
+<p>找到<code>user = apache</code>和<code>group = apache</code>，将<code>apache</code>修改为<code>nginx</code>。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6902649951/p130166.png"
+        data-srcset="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6902649951/p130166.png, https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6902649951/p130166.png 1.5x, https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6902649951/p130166.png 2x"
+        data-sizes="auto"
+        alt="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6902649951/p130166.png"
+        title="php-fpm conf" /></p>
+</li>
+<li>
+<p>按下Esc键，并输入<code>:wq</code>保存退出文件。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>运行以下命令启动<code>PHP-FPM</code>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">systemctl</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">php</span><span class="o">-</span><span class="n">fpm</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>运行以下命令设置<code>PHP-FPM</code>开机自启动。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">systemctl <span class="nb">enable</span> php-fpm
+</code></pre></div></li>
+</ol>
+<h2 id="步骤7搭建wordpress网站">步骤7：搭建WordPress网站</h2>
+<ol>
+<li>
+<p>远程连接部署好LNMP环境的服务器，配置WordPress数据库。</p>
+<ol>
+<li>
+<p>远程连接服务器</p>
+</li>
+<li>
+<p>进入MySQL数据库。</p>
+<p>使用<code>root</code>用户登录MySQL，并输入密码。密码为您在搭建环境时为数据库设置的密码。</p>
+<pre><code class="language-undefined" data-lang="undefined">mysql -uroot -p
+</code></pre></li>
+<li>
+<p>为WordPress网站创建数据库。</p>
+<p>本教程中数据库名为<code>wordpress</code>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">wordpress</span><span class="p">;</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>创建一个新用户管理WordPress库，提高安全性。</p>
+<p>MySQL在5.7版本后默认安装了密码强度验证插件validate_password。您可以登录MySQL后查看密码强度规则。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">show</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s2">&#34;%password%&#34;</span><span class="p">;</span><span class="w">
+</span></code></pre></div><p>本教程中创建新用户<code>user</code>，新用户密码为<code>PASSword123.</code>。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;PASSword123.&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>赋予用户对数据库<code>wordpress</code>的全部权限。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">wordpress</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>使配置生效。</p>
+<pre><code class="language-undefined" data-lang="undefined">flush privileges;
+</code></pre></li>
+<li>
+<p>退出MySQL。</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="k">exit</span><span class="p">;</span>
+</code></pre></div></li>
+</ol>
+</li>
+<li>
+<p>下载并解压WordPress，然后移动至网站根目录。</p>
+<ol>
+<li>
+<p>进入Nginx网站根目录，下载WordPress压缩包。</p>
+<p>本示例默认安装的是WordPress英文版本。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/share/nginx/html
+wget https://wordpress.org/wordpress-5.4.2.zip
+</code></pre></div><p>如果您需安装WordPress中文版本，需运行命令wget <a href="https://cn.wordpress.org/latest-zh_CN.zip">https://cn.wordpress.org/latest-zh_CN.zip</a>，下载WordPress中文版本压缩包。同时您需要注意，后续操作中压缩包的名称必须替换为latest-zh_CN.zip。</p>
+</li>
+<li>
+<p>解压WordPress压缩包。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">unzip</span> <span class="n">wordpress</span><span class="o">-</span><span class="mf">5.4</span><span class="o">.</span><span class="mf">2.</span><span class="n">zip</span>
+</code></pre></div></li>
+<li>
+<p>将WordPress安装目录下的<code>wp-config-sample.php</code>文件复制到<code>wp-config.php</code>文件中，并将<code>wp-config-sample.php</code>文件作为备份。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/share/nginx/html/wordpress
+cp wp-config-sample.php wp-config.php
+</code></pre></div></li>
+<li>
+<p>编辑<code>wp-config.php</code>文件。</p>
+<pre><code class="language-undefined" data-lang="undefined">vim wp-config.php
+</code></pre></li>
+<li>
+<p>按i键切换至编辑模式，根据已配置的WordPress数据库信息，修改MySQL相关配置信息，修改代码如下所示。</p>
+<p>WordPress网站的数据信息将通过数据库的<code>user</code>用户保存在名为<code>wordpress</code>的数据库中。</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="o">//</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="err">设置</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="err">具体信息来自您正在使用的主机</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="o">//</span><span class="w">
+</span><span class="w"></span><span class="cm">/** WordPress数据库的名称 */</span><span class="w">
+</span><span class="w"></span><span class="n">define</span><span class="p">(</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;wordpress&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="cm">/** MySQL数据库用户名 */</span><span class="w">
+</span><span class="w"></span><span class="n">define</span><span class="p">(</span><span class="s1">&#39;DB_USER&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="cm">/** MySQL数据库密码 */</span><span class="w">
+</span><span class="w"></span><span class="n">define</span><span class="p">(</span><span class="s1">&#39;DB_PASSWORD&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PASSword123.&#39;</span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="cm">/** MySQL主机 */</span><span class="w">
+</span><span class="w"></span><span class="n">define</span><span class="p">(</span><span class="s1">&#39;DB_HOST&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;localhost&#39;</span><span class="p">);</span><span class="w">
+</span></code></pre></div></li>
+<li>
+<p>修改完成后，按下Esc键后，输入<code>:wq</code>并回车，保存退出配置文件。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>安装并登录WordPress网站。</p>
+<ol>
+<li>
+<p>在本地物理机上使用浏览器访问<code>公网IP</code>，进入WordPress安装页面。</p>
+</li>
+<li>
+<p>填写网站基本信息，然后单击安装WordPress。</p>
+<p>填写信息参数说明：</p>
+<ul>
+<li>站点标题(Site Title)：WordPress网站的名称。例如：demowp。</li>
+<li>用户名(Username)：登录WordPress时所需的用户名，请注意安全性。例如：testwp。</li>
+<li>密码(Password)：登录WordPress时所需的密码，建议您设置安全性高的密码。例如：Wp.123456。</li>
+<li>您的电子邮件(Your Email)：用于接收通知的电子邮件。例如：1234567890@qq.com。</li>
+</ul>
+</li>
+<li>
+<p>单击登录。</p>
+</li>
+<li>
+<p>输入在安装WordPress时设置的用户名<code>testwp</code>和密码<code>Wp.123456</code>，然后单击登录。</p>
+<p>成功进入您个人的WordPress网站。</p>
+</li>
+</ol>
+</li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-10-12</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lnmp/">LNMP</a>,&nbsp;<a href="/tags/wordpress/">Wordpress</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/unity3d_stringbuilder/" class="prev" rel="prev" title="Unity3D优化_字符串拼接0GC"><i class="fas fa-angle-left fa-fw"></i>Unity3D优化_字符串拼接0GC</a>
+            <a href="/posts/website_nginx_order/" class="next" rel="next" title="nginx命令行操作">nginx命令行操作<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">黑色的墨 染上安详</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">iubucuoo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"2ldu0d07pKX43N6f4VDXUy7o-MdYXbMMI","appKey":"j5Y6hsYppxEPjxlFUKPkbyqH","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://2ldu0d07.api.lncldglobal.com","visitor":true}},"search":{"algoliaAppID":"IA0W1IQDAF","algoliaIndex":"index","algoliaSearchKey":"60bd46a3c724efeae0f6a18db8654690","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

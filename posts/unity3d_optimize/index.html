@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Unity优化 - iubucuoo</title><meta name="Description" content="unity优化相关的一些记录"><meta property="og:title" content="Unity优化" />
+<meta property="og:description" content="unity优化相关的一些记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.iubucuoo.com/posts/unity3d_optimize/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-02T13:09:36&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-02T13:09:36&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity优化"/>
+<meta name="twitter:description" content="unity优化相关的一些记录"/>
+<meta name="application-name" content="iubucuoo">
+<meta name="apple-mobile-web-app-title" content="iubucuoo"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://www.iubucuoo.com/posts/unity3d_optimize/" /><link rel="prev" href="http://www.iubucuoo.com/posts/ciencenet_v2ray/" /><link rel="next" href="http://www.iubucuoo.com/posts/tools_googlesearch/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unity优化",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.iubucuoo.com\/posts\/unity3d_optimize\/"
+        },"genre": "posts","keywords": "Markdown, unity","wordcount":  2958 ,
+        "url": "http:\/\/www.iubucuoo.com\/posts\/unity3d_optimize\/","datePublished": "2021-07-02T13:09:36+08:00","dateModified": "2021-07-02T13:09:36+08:00","publisher": {
+            "@type": "Organization",
+            "name": "iubucuoo"},"author": {
+                "@type": "Person",
+                "name": "iubucuoo"
+            },"description": "unity优化相关的一些记录"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/tools/"> 工具 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/iubucuoo" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/tools/" title="">工具</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/iubucuoo" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Unity优化</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>iubucuoo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/unity/"><i class="far fa-folder fa-fw"></i>Unity</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-07-02">2021-07-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2958 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;<span id="/posts/unity3d_optimize/" class="leancloud_visitors" data-flag-title="Unity优化">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#drawcall">Drawcall</a>
+      <ul>
+        <li><a href="#静态批次">静态批次</a></li>
+        <li><a href="#动态批次">动态批次</a></li>
+      </ul>
+    </li>
+    <li><a href="#优化gc">优化GC</a></li>
+    <li><a href="#脚本">脚本</a>
+      <ul>
+        <li><a href="#unity官方给出的一些优化建议">Unity官方给出的一些优化建议</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li>对cpu性能优化 主要从drawcall、物理组建、GC、脚本等几个方面</li>
+</ul>
+<h2 id="drawcall">Drawcall</h2>
+<p>unity分动态批次和静态批次。两种批次都是需要对象的材质是共享的，不同材质的对象无法进行批次。</p>
+<ul>
+<li>注在脚本中调用材质时，使用Renderer.material会造成材质的拷贝，而使用Render.sharedMaterial来调用则不会拷贝</li>
+</ul>
+<h3 id="静态批次">静态批次</h3>
+<p>静态在场景中不可移动(标记static)，静态批次会把多个对象合并成一个打对象，会导致内存损耗，有时候也需要避免太多的静态批次造成内存过高。优化就是要平衡各个硬件的压力不能只针对一方面极致</p>
+<h3 id="动态批次">动态批次</h3>
+<ol>
+<li>动态批次unity自动运行，也有一些自己的规则需要注意
+动态批次是逐点处理的，仅对于小于900个顶点的mesh有效，如果shader使用了顶点位置、法线和UV那么仅支持低于300个顶点的mesh。如果再次基础上使用UV1、UV0和切向量，则最多支持180个顶点的mesh</li>
+<li>缩放对动态批次也有影响，三轴同比例缩放的对象不会进行动态批次。非均匀缩放复制了具有烘培比例的网络-所以从渲染角度来看，它们根本没有被缩放，而是两份mesh(既然已经复制了mesh就顺带进行批次)。而对相同比例缩放来说使用的是同一份mesh此情况复制mesh来进行批次渲染不值得。</li>
+<li>一定要使用同一个材质，即便两个一模一样也不会进行批次</li>
+<li>拥有lightmap的物件因为有额外的材质属性(比如偏移和缩放系数)所以不能进行批次</li>
+<li>多通道的shader会妨碍批处理操作，接收实时阴影的物件无法进行批次处理</li>
+</ol>
+<ul>
+<li>渲染的顺序可能打断批次
+<ul>
+<li>比如一个材质夹在两个相同材质中间，这个时候两个相同材质的被隔开无法核批</li>
+<li>渲染的顺序是根据物件到摄像机的距离进行从远到近的渲染，相同材质的对象尽量在一层。修改shader中渲染队列值，当小于等于2500时，unity会认为其不透明，对于不同材质但Z值相同对象，unity不对其进行排序，这样就算有其他材质插入也不会打破批次。如果队列值高于2500则会按顺序被打乱</li>
+</ul>
+</li>
+<li>知道渲染顺序这个规则，我们可以根据对象到相机的深度或者距离进行排列规则
+<ul>
+<li>场景里可以用Z轴来进行空间划分</li>
+<li>UI里用深度来进行划分</li>
+<li>人物模型等场景中的对象相对复杂，空间划分难度较大，只能尽量避免</li>
+<li>一个特效使用多个材质，过程中也会引起drawcall波动，也可以进行相应的空间划分。</li>
+<li>使用过后的特效等对象，在不起效的时候，应该设置为未激活状态，否则会继续占用drawcall，消耗设备的计算力，所以当一个对象使用后应当执行销毁或者未激活状态</li>
+</ul>
+</li>
+<li>打包图集
+<ul>
+<li>每个材质、纹理的渲染一定是会产生drawcall的，这个drawcall只能通过打包图集来进行优化，将多个纹理进行打包图集来减少材质，多个对象共享一个材质(纹理shader)合并的时候也要注意对同时出现的放在一起，不然会加载很多无用资源，造成内存占用升高</li>
+</ul>
+</li>
+<li>制作图集一般遵循几个规划 ：
+<ul>
+<li>从功能角度进行划分，如公共部分、每个具体的界面、功能上密切相关的打包到一起</li>
+<li>不能将所有的东西打包到一个图集里面，特别不可能同时出项的东西，一个你不需要显示的图片会一直占用你的内存。</li>
+<li>控制图集大小，不能让图集太大，一个很大的图集的drawcall消耗或许顶上十几个小图集的消耗</li>
+</ul>
+</li>
+<li>经过精心划分的图集与渲染顺序，drawcall一定有质的优化</li>
+<li>使用灯光会打断drawcall，尽量使用烘培来实现光照效果</li>
+</ul>
+<h2 id="优化gc">优化GC</h2>
+<ul>
+<li>尝试再适当的时机，手动触发GC和扩展堆大小，以便GC可控</li>
+<li>将局部函数中的局部引用变量写成公共的</li>
+<li>使用对象池</li>
+<li>减少字符串创建，针对常用的字符串用id替代</li>
+<li>注意装箱，装箱会产生垃圾源于底层，当一个值类型变量被装箱时，unity在堆上创建一个临时的object来包装值类型变量。一个object是一个引用类型的变量，所以当这个临时对象被处理时会产生垃圾。</li>
+<li>Linq和正则在后台有装箱操作而产生垃圾</li>
+<li>构建代码最小化GC</li>
+<li>代码的构建方式可能会影响GC，即使代码中没有堆分配，也可能会增加GC的负担。可能增加GC的负担之一是要求检查他不改检查的东西，Struct是值类型的变量，但是如果包含一个引用的类型变量的Struct，那么垃圾收集器必须检查整个结构体。</li>
+<li>另外一个增加GC负担的操作是使用不必要的对象，当垃圾收集器搜索堆上的对象的引用时，它必须检查代码中的每一个当前对象的引用，更少的对象引用意味着更少的工作量</li>
+<li>foreach每次迭代会产生垃圾内存</li>
+</ul>
+<h2 id="脚本">脚本</h2>
+<ol>
+<li>Getcomponent 有三种获取方式
+Getcomponent（string）&mdash;-&gt;在编写自定义调试台的时候，解析用户输入的字符串来获取组建的时候才适用，对于产品级的应用程序没理由使用
+Getcomponent<!-- raw HTML omitted -->()
+Getcomponent(typeof(T))
+这两个方法获取的效率相差不大，根据每个版本优化的关系，经测试在untiy5的后续版本中最好使用	Getcomponent<!-- raw HTML omitted -->()</li>
+<li>Update函数调用Getcomponent等接口最好缓存</li>
+<li>移除空的回调定义 如monobehaviour的Start()、Update()，完整的回调列表可通过untiy文档查找。当场景就有成千上万个空定义也会造成可观的性能消耗(可利用正则查找空的并移除)</li>
+<li>在update中处理，如果可以隔多帧处理一次，如将
+<code>update(){DoSth();}</code>修改为<code>update() { if(Time.framecount %5 == 0) DoSth();} </code>脚本主要是针对update中复杂跟耗费的逻辑进行优化</li>
+<li>共享计算输出，避免重复堆一个结果进行多次的计算</li>
+<li>从gameobject取出字符串属性
+从gameobject检索字符串属性是另一种意外跨越本机-托管桥接的微妙方式(gameobject的tag和name受到这个影响)应该只在性能无关的地方调用。
+对于tag的属性常用比较Gameobject提供了CompareTag()方法(避免本地-托管桥接，不会导致内存分配与对应的垃圾回收)，name属性没有对应的办法，应该尽量少使用</li>
+<li>对transform的属性修改，会通过其父对象的transform为对象生成正确的transform(意味着在hierarchy窗口越深的位置计算的越多)，在复杂的时间中对同一transform组建属性修改它每次都会触发内部消息进行一系列计算，因此属性修改可以通过缓存值在针尾来更改它来减少计算</li>
+</ol>
+<h3 id="unity官方给出的一些优化建议">Unity官方给出的一些优化建议</h3>
+<ol>
+<li>PC平台的话保持场景中显示的顶点数少于200K~3M，移动设备的话少于10W，一切取决于你的目标GPU与CPU。</li>
+<li>如果你用U3D自带的SHADER，在表现不差的情况下选择Mobile或Unlit目录下的。它们更高效。</li>
+<li>尽可能共用材质。</li>
+<li>将不需要移动的物体设为Static，让引擎可以进行其批处理。</li>
+<li>尽可能不用灯光。动态灯光更加不要了。</li>
+<li>尝试用压缩贴图格式，或用16位代替32位。</li>
+<li>如果不需要别用雾效(fog)</li>
+<li>尝试用OcclusionCulling,在房间过道多遮挡物体多的场景非常有用。若不当反而会增加负担。</li>
+<li>用天空盒去“褪去”远处的物体。</li>
+<li>shader中用贴图混合的方式去代替多重通道计算。</li>
+<li>shader中注意float/half/fixed的使用。</li>
+<li>shader中不要用复杂的计算pow,sin,cos,tan,log等。</li>
+<li>shader中越少Fragment越好。</li>
+<li>注意是否有多余的动画脚本，模型自动导入到U3D会有动画脚本，大量的话会严重影响消耗CPU计算。</li>
+<li>注意碰撞体的碰撞层，不必要的碰撞检测请舍去。</li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-07-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/markdown/">Markdown</a>,&nbsp;<a href="/tags/unity/">unity</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/ciencenet_v2ray/" class="prev" rel="prev" title="V2ray安装与使用"><i class="fas fa-angle-left fa-fw"></i>V2ray安装与使用</a>
+            <a href="/posts/tools_googlesearch/" class="next" rel="next" title="Google搜索小技巧">Google搜索小技巧<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">黑色的墨 染上安详</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">iubucuoo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"2ldu0d07pKX43N6f4VDXUy7o-MdYXbMMI","appKey":"j5Y6hsYppxEPjxlFUKPkbyqH","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://2ldu0d07.api.lncldglobal.com","visitor":true}},"search":{"algoliaAppID":"IA0W1IQDAF","algoliaIndex":"index","algoliaSearchKey":"60bd46a3c724efeae0f6a18db8654690","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

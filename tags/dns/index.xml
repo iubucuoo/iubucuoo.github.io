@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DNS - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/dns/</link>
+        <description>DNS - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 22 Jul 2021 20:38:14 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/dns/" rel="self" type="application/rss+xml" /><item>
+    <title>配置域名DNS</title>
+    <link>http://www.iubucuoo.com/posts/website_vpsdns/</link>
+    <pubDate>Thu, 22 Jul 2021 20:38:14 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_vpsdns/</guid>
+    <description><![CDATA[将域名与ip捆绑]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>dnf - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/dnf/</link>
+        <description>dnf - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 12 Oct 2022 19:58:45 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/dnf/" rel="self" type="application/rss+xml" /><item>
+    <title>安装dnf</title>
+    <link>http://www.iubucuoo.com/posts/website_dnf/</link>
+    <pubDate>Wed, 12 Oct 2022 19:58:45 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_dnf/</guid>
+    <description><![CDATA[ 安装dnf及常见的 dnf 命令介绍]]></description>
+</item></channel>
+</rss>

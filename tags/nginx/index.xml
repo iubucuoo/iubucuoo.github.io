@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>nginx - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/nginx/</link>
+        <description>nginx - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 12 Oct 2022 19:49:00 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/nginx/" rel="self" type="application/rss+xml" /><item>
+    <title>nginx配置多个域名使用同一个端口</title>
+    <link>http://www.iubucuoo.com/posts/website_nginx_moreport/</link>
+    <pubDate>Wed, 12 Oct 2022 19:49:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_nginx_moreport/</guid>
+    <description><![CDATA[ 使用nginx的代理转发功能帮我们实现共用80端口的需求]]></description>
+</item><item>
+    <title>nginx命令行操作</title>
+    <link>http://www.iubucuoo.com/posts/website_nginx_order/</link>
+    <pubDate>Wed, 12 Oct 2022 19:40:33 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_nginx_order/</guid>
+    <description><![CDATA[ nginx命令行操作]]></description>
+</item></channel>
+</rss>

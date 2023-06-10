@@ -1,0 +1,77 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>构建网站 - 分类 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/categories/buildwebsite/</link>
+        <description>构建网站 - 分类 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 12 Oct 2022 20:08:18 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/categories/buildwebsite/" rel="self" type="application/rss+xml" /><item>
+    <title>如何查看linux服务器内存使用情况</title>
+    <link>http://www.iubucuoo.com/posts/website_liunxmemory/</link>
+    <pubDate>Wed, 12 Oct 2022 20:08:18 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_liunxmemory/</guid>
+    <description><![CDATA[ liunx系统内存命令]]></description>
+</item><item>
+    <title>mysql内存占用高</title>
+    <link>http://www.iubucuoo.com/posts/website_mysql_memory/</link>
+    <pubDate>Wed, 12 Oct 2022 20:04:56 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_mysql_memory/</guid>
+    <description><![CDATA[ mysql内存占用高]]></description>
+</item><item>
+    <title>WordPress中安装插件需要ftp怎么办？</title>
+    <link>http://www.iubucuoo.com/posts/website_wordpress_ftp/</link>
+    <pubDate>Wed, 12 Oct 2022 20:00:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_wordpress_ftp/</guid>
+    <description><![CDATA[ 在初次搭建wordpress成功后,安装wordpress插件时缺发现需要ftp服务]]></description>
+</item><item>
+    <title>安装dnf</title>
+    <link>http://www.iubucuoo.com/posts/website_dnf/</link>
+    <pubDate>Wed, 12 Oct 2022 19:58:45 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_dnf/</guid>
+    <description><![CDATA[ 安装dnf及常见的 dnf 命令介绍]]></description>
+</item><item>
+    <title>php内存占用过高</title>
+    <link>http://www.iubucuoo.com/posts/website_php_memory/</link>
+    <pubDate>Wed, 12 Oct 2022 19:54:32 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_php_memory/</guid>
+    <description><![CDATA[ php内存占用过高]]></description>
+</item><item>
+    <title>php命令行操作</title>
+    <link>http://www.iubucuoo.com/posts/website_php_order/</link>
+    <pubDate>Wed, 12 Oct 2022 19:51:27 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_php_order/</guid>
+    <description><![CDATA[ php命令行操作]]></description>
+</item><item>
+    <title>nginx配置多个域名使用同一个端口</title>
+    <link>http://www.iubucuoo.com/posts/website_nginx_moreport/</link>
+    <pubDate>Wed, 12 Oct 2022 19:49:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_nginx_moreport/</guid>
+    <description><![CDATA[ 使用nginx的代理转发功能帮我们实现共用80端口的需求]]></description>
+</item><item>
+    <title>nginx命令行操作</title>
+    <link>http://www.iubucuoo.com/posts/website_nginx_order/</link>
+    <pubDate>Wed, 12 Oct 2022 19:40:33 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_nginx_order/</guid>
+    <description><![CDATA[ nginx命令行操作]]></description>
+</item><item>
+    <title>手动安装LNMP与wordpress</title>
+    <link>http://www.iubucuoo.com/posts/website_lnmp_wordpress/</link>
+    <pubDate>Wed, 12 Oct 2022 19:33:57 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_lnmp_wordpress/</guid>
+    <description><![CDATA[手动安装LNMP与wordpress]]></description>
+</item><item>
+    <title>Valine出现Code403访问被api域名白名单拒绝</title>
+    <link>http://www.iubucuoo.com/posts/website_valinecode403/</link>
+    <pubDate>Fri, 06 Aug 2021 10:41:11 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/website_valinecode403/</guid>
+    <description><![CDATA[Valine出现Code403访问被api域名白名单拒绝]]></description>
+</item></channel>
+</rss>

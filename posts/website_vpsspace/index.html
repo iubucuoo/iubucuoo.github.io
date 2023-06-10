@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>搭建网页记录 - iubucuoo</title><meta name="Description" content="从无到有，搭建网页记录"><meta property="og:title" content="搭建网页记录" />
+<meta property="og:description" content="从无到有，搭建网页记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.iubucuoo.com/posts/website_vpsspace/" /><meta property="og:image" content="http://www.iubucuoo.com/posts/website_vpsspace/featured-image.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-29T00:00:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-29T00:00:20&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.iubucuoo.com/posts/website_vpsspace/featured-image.jpg"/>
+<meta name="twitter:title" content="搭建网页记录"/>
+<meta name="twitter:description" content="从无到有，搭建网页记录"/>
+<meta name="application-name" content="iubucuoo">
+<meta name="apple-mobile-web-app-title" content="iubucuoo"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://www.iubucuoo.com/posts/website_vpsspace/" /><link rel="next" href="http://www.iubucuoo.com/posts/ciencenet_v2ray/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "搭建网页记录",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.iubucuoo.com\/posts\/website_vpsspace\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "http:\/\/www.iubucuoo.com\/posts\/website_vpsspace\/featured-image.jpg",
+                            "width":  670 ,
+                            "height":  428 
+                        }],"genre": "posts","keywords": "vps, hugo","wordcount":  1502 ,
+        "url": "http:\/\/www.iubucuoo.com\/posts\/website_vpsspace\/","datePublished": "2021-05-29T00:00:20+08:00","dateModified": "2021-05-29T00:00:20+08:00","publisher": {
+            "@type": "Organization",
+            "name": "iubucuoo"},"author": {
+                "@type": "Person",
+                "name": "iubucuoo"
+            },"description": "从无到有，搭建网页记录"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/tools/"> 工具 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/iubucuoo" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/tools/" title="">工具</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/iubucuoo" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">搭建网页记录</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>iubucuoo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/buildwebsite/"><i class="far fa-folder fa-fw"></i>构建网站</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-05-29">2021-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1502 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/posts/website_vpsspace/" class="leancloud_visitors" data-flag-title="搭建网页记录">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/website_vpsspace/featured-image.jpg"
+        data-srcset="/posts/website_vpsspace/featured-image.jpg, /posts/website_vpsspace/featured-image.jpg 1.5x, /posts/website_vpsspace/featured-image.jpg 2x"
+        data-sizes="auto"
+        alt="/posts/website_vpsspace/featured-image.jpg"
+        title="从无到有，搭建网页记录" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#常用命令操作">常用命令操作</a></li>
+    <li><a href="#vps与域名">VPS与域名</a></li>
+    <li><a href="#vps上配置nginx">VPS上配置<strong>nginx</strong></a></li>
+    <li><a href="#vps上建git库">VPS上建git库</a></li>
+    <li><a href="#建一个git-hook">建一个git hook</a></li>
+    <li><a href="#编辑网页内容">编辑网页内容</a></li>
+    <li><a href="#内容部署到vps">内容部署到VPS</a></li>
+    <li><a href="#上传更新的内容">上传更新的内容</a></li>
+    <li><a href="#如何拉取内容到本地">如何拉取内容到本地</a></li>
+    <li><a href="#结束">结束</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="搭建个人页记录">搭建个人页记录</h1>
+<h2 id="常用命令操作">常用命令操作</h2>
+<ol>
+<li><strong>rm -rf 目录名字</strong> 删除文件夹以及文件夹中的所有文件命令</li>
+<li><strong>-r  :</strong> 向下递归删除</li>
+<li><strong>-f  :</strong> 直接强行删除，且没有任何提示</li>
+<li><strong>rm -f 文件名</strong>  删除文件命令行强行删除文件且无提示</li>
+<li><strong>pwd</strong> 查看当前路径</li>
+<li><strong>ls -l</strong> 查看当前路径下面的文件</li>
+<li><strong>i</strong> 进入编辑状态</li>
+<li><strong>:wq</strong> 保存退出</li>
+</ol>
+<h2 id="vps与域名">VPS与域名</h2>
+<p>根据自己的需求购买VPS 域名并解析IP ,我自己用的VPS是 <strong><a href="https://www.hostwinds.com/" target="_blank" rel="noopener noreffer">HostWinds</a></strong>  域名是 <strong><a href="https://www.namesilo.com/" target="_blank" rel="noopener noreffer">namesilo</a></strong></p>
+<h2 id="vps上配置nginx">VPS上配置<strong>nginx</strong></h2>
+<ul>
+<li><strong>注 :</strong> Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。利用Nginx可以快速在vps上搭建web服务器</li>
+</ul>
+<ol>
+<li>
+<p>远程登陆到vps服务器 先创建三个目录</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  mkdir / blog#目录1，用作git上传的仓库目录，之后会用到
+  mkdir / tmp/blog#目录2，用作git clone的目录，之后会用到
+  mkdir / usr/share/nginx/html	 <span class="c1">#目录3，用作nginx的webserver根目录，如果默认已经创建则忽略</span>
+</code></pre></div></li>
+<li>
+<p>安装nginx</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  yum update
+  yum install nginx
+</code></pre></div><p>此时在本地浏览器访问域名就可以看到nginx的欢迎页面</p>
+</li>
+<li>
+<p>配置Nginx.conf文件位置通过命令 nginx -t查看</p>
+<p>vim编辑.conf文件</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> vim /usr/local/nginx/conf/nginx.conf
+</code></pre></div><p>在http{}节点中增加（或修改）</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>	<span class="c1">#服务器</span>
+listen       80<span class="p">;</span>
+    server_name  www.test.com<span class="p">;</span> 	<span class="c1"># 你的域名</span>
+    root /usr/share/nginx/html<span class="p">;</span> <span class="c1"># webserver根目录（目录3）</span>
+    <span class="o">}</span>
+    server <span class="o">{</span>	<span class="c1">#跳转，直接输入test.com 或者ip地址，可跳转到www.test.com</span>
+    listen	80<span class="p">;</span>
+    server_name test.com<span class="p">;</span>
+    <span class="k">return</span> <span class="m">301</span> http://www.test.com<span class="p">;</span>
+    <span class="o">}</span>
+</code></pre></div><p><strong>注:</strong>  include /etc/nginx/sites-enabled/*; 要注释掉</p>
+<p>否则网站的默认目录会是/var/www/html，而不是/usr/share/nginx/html了</p>
+</li>
+<li>
+<p>配置完成
+后面只需要将我们博客的内容放到配置文件中指定的webserver目录(/usr/share/nginx/html)，即可通过域名访问我们的博客</p>
+</li>
+<li>
+<p>service nginx restart //重启服务</p>
+</li>
+</ol>
+<h2 id="vps上建git库">VPS上建git库</h2>
+<ol>
+<li>使用git来实现将本地的博客内容推到vps服务器上</li>
+<li>在vps上建一个远程仓库，并且为这个仓库建一个hook，这样每次从本地push时，博客能同步更新</li>
+<li>在vps上，进入之前创建的第一个目录
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  <span class="nb">cd</span> /blog     
+  git init --bare  
+</code></pre></div></li>
+</ol>
+<h2 id="建一个git-hook">建一个git hook</h2>
+<ol>
+<li>
+<p>进入远程仓库的hooks目录进行操作：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  <span class="nb">cd</span> /blog/hooks
+  vim post-receive
+</code></pre></div></li>
+<li>
+<p>将以下内容写入<strong>post-recevie</strong>文件
+<strong>注:</strong> 这段代码，会将本地每次push到vps上git仓库的内容，放到Nginx webserver目录（目录3）</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">GIT_REPO</span><span class="o">=</span>/blog	<span class="c1">#目录1</span>
+<span class="nv">TMP_GIT_CLONE</span><span class="o">=</span>/tmp/blog <span class="c1">#目录2 </span>
+<span class="nv">NGINX_HTML</span><span class="o">=</span>/usr/share/nginx/html#目录3
+rm -rf <span class="si">${</span><span class="nv">TMP_GIT_CLONE</span><span class="si">}</span> 
+git clone <span class="nv">$GIT_REPO</span> <span class="nv">$TMP_GIT_CLONE</span>
+rm -rf <span class="si">${</span><span class="nv">NGINX_HTML</span><span class="si">}</span>/*
+cp -rf <span class="si">${</span><span class="nv">TMP_GIT_CLONE</span><span class="si">}</span>/* <span class="si">${</span><span class="nv">NGINX_HTML</span><span class="si">}</span>
+</code></pre></div></li>
+<li>
+<p>保存并退出，然后修改文件的权限</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">chmod <span class="m">755</span> post-receive
+</code></pre></div></li>
+</ol>
+<h2 id="编辑网页内容">编辑网页内容</h2>
+<p>这里我用到的是<a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">hugo</a></p>
+<ol>
+<li>
+<p>在本地下载好hugo可执行文件</p>
+<p><strong>Window:</strong>  下载好解压在某个路径  将这个路径添加到环境变量中(不然命令行无法执行到)</p>
+<p><strong>Linux:</strong>  <code>yum install hugo</code></p>
+</li>
+<li>
+<p>然后在hugo主页中进入<a href="https://gohugo.io/getting-started/quick-start/" target="_blank" rel="noopener noreffer">教程</a>，按着网页中的方式操作</p>
+</li>
+<li>
+<p>生成静态文件public后进入下一步部署</p>
+</li>
+</ol>
+<h2 id="内容部署到vps">内容部署到VPS</h2>
+<ol>
+<li>将前面生成的public目录初始化为git仓库，commit提交，再push到vps上就可以了
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> public     
+git init     
+git add --all
+git commit -m <span class="s2">&#34;Initial blog repo&#34;</span>
+<span class="c1">#当前的工作目录下设置远程仓库的地址</span>
+git remote add origin ssh://your_user@VPS_IP:/blog  
+<span class="c1">#直接修改工作目录下远程仓库的地址(添加过可以不用再修改)</span>
+git remote set-url origin ssh://your_user@VPS_IP:/blog <span class="c1"># 若VPS的ssh默认端口不是22，需另设置ssh端口。  </span>
+git push origin master
+</code></pre></div></li>
+<li>之后会提示输入密码，输入的时候不会显示直接输入就行。</li>
+<li>push之后就可以通过域名访问到新编辑的网站了</li>
+</ol>
+<h2 id="上传更新的内容">上传更新的内容</h2>
+<p>之后每次编辑完内容，按着之前的方式生成静态网页public，进入public</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  git add --all 添加所有修改
+  git commit -m <span class="s2">&#34;xxxxxxxxx&#34;</span> 提交修改
+  git push origin master
+</code></pre></div><h2 id="如何拉取内容到本地">如何拉取内容到本地</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  <span class="nb">cd</span> public <span class="c1"># 进入现有的本地目录</span>
+  git clone ssh://your_user@VPS_IP:/blog# 第一次使用要把远程仓库的内容克隆到本地
+  
+  <span class="c1">#下拉</span>
+  git fetch orgin master <span class="c1"># 将远程仓库的 master 分支下载到本地当前 branch 中</span>
+  git merge origin/master <span class="c1"># 进行合并</span>
+  
+  <span class="c1"># 上传</span>
+  git add -all <span class="c1"># 把所有变化加入缓存区</span>
+  git commit -m <span class="s2">&#34;xxxxxxxxx&#34;</span> <span class="c1"># 提交到本地仓库</span>
+  git push origin master <span class="c1"># 推送到远程仓库 origin 的 master 分支</span>
+</code></pre></div><h2 id="结束">结束</h2>
+<p>待后续优化 添加钥避免每次输入密码</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-05-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vps/">vps</a>,&nbsp;<a href="/tags/hugo/">hugo</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/ciencenet_v2ray/" class="next" rel="next" title="V2ray安装与使用">V2ray安装与使用<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">黑色的墨 染上安详</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">iubucuoo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"2ldu0d07pKX43N6f4VDXUy7o-MdYXbMMI","appKey":"j5Y6hsYppxEPjxlFUKPkbyqH","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://2ldu0d07.api.lncldglobal.com","visitor":true}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"algoliaAppID":"IA0W1IQDAF","algoliaIndex":"index","algoliaSearchKey":"60bd46a3c724efeae0f6a18db8654690","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

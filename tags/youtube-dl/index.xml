@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>youtube-dl - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/youtube-dl/</link>
+        <description>youtube-dl - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 06 Aug 2021 10:50:15 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/youtube-dl/" rel="self" type="application/rss+xml" /><item>
+    <title>youtube-dl下载利器</title>
+    <link>http://www.iubucuoo.com/posts/tools_youtube-dl/</link>
+    <pubDate>Fri, 06 Aug 2021 10:50:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_youtube-dl/</guid>
+    <description><![CDATA[通过网站链接下载网站内的视频到本地磁盘]]></description>
+</item></channel>
+</rss>

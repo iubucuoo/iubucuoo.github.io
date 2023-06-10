@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Unity资源优化建议 - iubucuoo</title><meta name="Description" content="尝试优化 Unity 资源"><meta property="og:title" content="Unity资源优化建议" />
+<meta property="og:description" content="尝试优化 Unity 资源" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.iubucuoo.com/posts/untiy3d_unityartdo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-13T10:09:37&#43;08:00" />
+<meta property="article:modified_time" content="2022-10-13T10:09:37&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity资源优化建议"/>
+<meta name="twitter:description" content="尝试优化 Unity 资源"/>
+<meta name="application-name" content="iubucuoo">
+<meta name="apple-mobile-web-app-title" content="iubucuoo"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://www.iubucuoo.com/posts/untiy3d_unityartdo/" /><link rel="prev" href="http://www.iubucuoo.com/posts/untiy3d_unityuido/" /><link rel="next" href="http://www.iubucuoo.com/posts/untiy3d_unityaudiodo/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unity资源优化建议",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.iubucuoo.com\/posts\/untiy3d_unityartdo\/"
+        },"genre": "posts","keywords": "unityArt, unity","wordcount":  1960 ,
+        "url": "http:\/\/www.iubucuoo.com\/posts\/untiy3d_unityartdo\/","datePublished": "2022-10-13T10:09:37+08:00","dateModified": "2022-10-13T10:09:37+08:00","publisher": {
+            "@type": "Organization",
+            "name": "iubucuoo"},"author": {
+                "@type": "Person",
+                "name": "iubucuoo"
+            },"description": "尝试优化 Unity 资源"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/tools/"> 工具 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/iubucuoo" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/tools/" title="">工具</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/iubucuoo" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Unity资源优化建议</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>iubucuoo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/unity/"><i class="far fa-folder fa-fw"></i>Unity</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-10-13">2022-10-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1960 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/posts/untiy3d_unityartdo/" class="leancloud_visitors" data-flag-title="Unity资源优化建议">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#找到正确的纹理导入方式"><strong>找到正确的纹理导入方式</strong></a></li>
+        <li><a href="#压缩纹理"><strong>压缩纹理</strong></a></li>
+        <li><a href="#调整网格导入设置"><strong>调整网格导入设置</strong></a></li>
+        <li><a href="#检查模型多边形面数"><strong>检查模型多边形面数</strong></a></li>
+        <li><a href="#借助assetpostprocessor自动设定导入设置"><strong>借助AssetPostprocessor自动设定导入设置</strong></a></li>
+        <li><a href="#使用addressable-asset-system可寻址资源系统"><strong>使用Addressable Asset System（可寻址资源系统）</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>资源管线会极大地影响应用的性能。因此，我们最好请一名经验丰富的技术美术来协助制定和实施资源的格式、规格和导入设置，让流程尽可能流畅。</p>
+<p>请不要完全依赖默认设置，使用具体平台的重写组件来优化纹理、网格几何形等资源。错误的资源设置可能会导致游戏文件过大、构建时间过长，甚至造成不合理的内存占用。请灵活使用<a href="https://docs.unity.cn/cn/current/Manual/Presets.html" target="_blank" rel="noopener noreffer">Presets</a>（预设）功能来制定适合项目的设置基准。</p>
+<p>更多详情请参阅<a href="https://docs.unity3d.com/cn/current/Manual/ImportingAssets.html" target="_blank" rel="noopener noreffer">这份美术资源最佳使用指南</a>，或在Unity Learn上学习<a href="https://learn.u3d.cn/tutorial/arm-unity-optimization-tips" target="_blank" rel="noopener noreffer">3D Art Optimization for Mobile Applications</a>教程。</p>
+<h3 id="找到正确的纹理导入方式"><strong>找到正确的纹理导入方式</strong></h3>
+<p>一款应用的大部分内存占用一般是用在了纹理上，因此纹理的导入设置非常关键。通常来说，纹理的导入应遵守如下原则：</p>
+<ul>
+<li>**降低最大分辨率：**在肉眼不易察觉、尽量不破坏原图的前提下使用较低的分辨率，从而达到优化内存占用的目的。</li>
+<li>**采用二次幂（power of two，POT）压缩格式：**Unity要求移动端的纹理压缩格式（PVRCT或ETC）采用二次幂的纹理尺寸。</li>
+<li>**制作纹理图集（texture atlas）：**将多张纹理合并到一张纹理图集中可以减少绘制调用次数，加快渲染速度。纹理图集可使用<a href="https://docs.unity3d.com/cn/current/Manual/class-SpriteAtlas.html" target="_blank" rel="noopener noreffer">Unity Sprite Atlas</a>或第三方的<a href="https://www.codeandweb.com/texturepacker" target="_blank" rel="noopener noreffer">TexturePacker</a>  进行制作。</li>
+<li><strong>取消勾选Read/Write Enabled：<strong>该选项在启用时会分别在CPU和GPU可寻址内存中创建一个副本，让纹理的内存占用翻倍。该选项在大多数情况下都可禁用。如果纹理是在运行时生成的，则可通过调用</strong>Texture2D.Apply</strong>，将<strong>makeNoLongerReadable</strong>设为<strong>true</strong>来强制禁用选项。</li>
+<li>**禁用多余的Mip Map：**Mip Map贴图在2D精灵和UI图形这类大小始终一致的纹理上并无用处，但在随镜头距离变化而变化的3D模型上需要保留。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://blog-api.unity.com/sites/default/files/2021-08/image6.png?imwidth=3840&amp;"
+        data-srcset="https://blog-api.unity.com/sites/default/files/2021-08/image6.png?imwidth=3840&amp;, https://blog-api.unity.com/sites/default/files/2021-08/image6.png?imwidth=3840&amp; 1.5x, https://blog-api.unity.com/sites/default/files/2021-08/image6.png?imwidth=3840&amp; 2x"
+        data-sizes="auto"
+        alt="https://blog-api.unity.com/sites/default/files/2021-08/image6.png?imwidth=3840&amp;"
+        title="Editor screenshot" /></p>
+<p>正确的纹理导入设置可以优化应用包的大小。</p>
+<h3 id="压缩纹理"><strong>压缩纹理</strong></h3>
+<p>我们来对比一下两个模型和纹理相同的例子：左图所占用的内存几乎是右图的八倍，但在视觉上却没有什么不同。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://blog-api.unity.com/sites/default/files/2021-08/image18.jpg?imwidth=5000&amp;"
+        data-srcset="https://blog-api.unity.com/sites/default/files/2021-08/image18.jpg?imwidth=5000&amp;, https://blog-api.unity.com/sites/default/files/2021-08/image18.jpg?imwidth=5000&amp; 1.5x, https://blog-api.unity.com/sites/default/files/2021-08/image18.jpg?imwidth=5000&amp; 2x"
+        data-sizes="auto"
+        alt="https://blog-api.unity.com/sites/default/files/2021-08/image18.jpg?imwidth=5000&amp;"
+        title="Screenshot" /></p>
+<p>未经压缩的纹理会占用更多的内存。</p>
+<p>因此，请为iOS和Android应用采用自适应可伸缩纹理压缩（ATSC）格式。大多数游戏在开发时都以支持ATSC压缩、配置最低的设备作为目标设备。</p>
+<p>当然也有例外，包括：</p>
+<ul>
+<li>运行于A7及更老的芯片上的iOS游戏（即iPhone 5、5S等）——请使用PVRTC格式</li>
+<li>运行于2016年以前的安卓设备的安卓游戏——请使用  ETC2  （爱立信的纹理压缩格式）</li>
+</ul>
+<p>如果PVRTC和ETC等压缩格式的质量不够理想，或者目标设备不完全支持ASTC格式，我们可以试着将32位纹理替换成16位纹理。</p>
+<p>请在完整版手册中详细了解<a href="https://docs.unity3d.com/cn/current/Manual/class-TextureImporterOverride.html" target="_blank" rel="noopener noreffer">各平台推荐的纹理压缩格式</a>。</p>
+<h3 id="调整网格导入设置"><strong>调整网格导入设置</strong></h3>
+<p>类似于纹理，网格模型如果导入不当，也会占用过多的内存。要想尽量减少网格模型的内存占用，我们可以：</p>
+<ul>
+<li><strong>压缩网格</strong>，采用激进的压缩方法来减少磁盘空间占用（运行时的占用不会受影响）。注意，量化模型可能会导致模型失真，请根据实际情况来选择合适的压缩等级。</li>
+<li><strong>禁用Read/Write</strong>，该选项会分别在运行内存和GPU内存中创建模型的副本，它在大多数情况下都应禁用（Unity 2019.2及更早的版本会默认启用）。</li>
+<li><strong>禁用动画骨架和BlendShapes</strong>，若网格模型不带有骨骼动画或BlendShapes动画，则这两个选项并无多大用处。</li>
+<li><strong>禁用法线和切线贴图</strong>，若网格模型的材质并没有法线或切线贴图，则我们能禁用这两个选项来节省性能开支。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://blog-api.unity.com/sites/default/files/2021-08/image1.jpg?imwidth=1920&amp;"
+        data-srcset="https://blog-api.unity.com/sites/default/files/2021-08/image1.jpg?imwidth=1920&amp;, https://blog-api.unity.com/sites/default/files/2021-08/image1.jpg?imwidth=1920&amp; 1.5x, https://blog-api.unity.com/sites/default/files/2021-08/image1.jpg?imwidth=1920&amp; 2x"
+        data-sizes="auto"
+        alt="https://blog-api.unity.com/sites/default/files/2021-08/image1.jpg?imwidth=1920&amp;"
+        title="Editor screenshot" /></p>
+<p>请仔细检查网格模型的导入设置。</p>
+<h3 id="检查模型多边形面数"><strong>检查模型多边形面数</strong></h3>
+<p>一个模型如果有更高的分辨率就意味着更多的内存占用和更长的GPU处理时间。通常来说，游戏的背景并不需要数十万的面，并且许多DCC软件导出的模型也可做一定的精简。举例来说，处于摄影机拍摄角之外的多边形可被删去，模型的细节可使用纹理和法线贴图呈现，不必使用过于复杂的网格来保留细节。</p>
+<h3 id="借助assetpostprocessor自动设定导入设置"><strong>借助AssetPostprocessor自动设定导入设置</strong></h3>
+<p><a href="https://docs.unity.cn/ScriptReference/AssetPostprocessor.html" target="_blank" rel="noopener noreffer">AssetPostprocessor</a>功能支持在导入资源时运行脚本，如此一来我们便能在模型、纹理、音频等资源的导入前/后应用自定义设置。</p>
+<h3 id="使用addressable-asset-system可寻址资源系统"><strong>使用Addressable Asset System（可寻址资源系统）</strong></h3>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.addressables@latest" target="_blank" rel="noopener noreffer">Addressable Asset System</a>可以一种更为简单的方式来管理内容。系统采用统一的处理方式，通过调用AssetBundle的“地址”或别称，从本地路径或远程的内容分发网络（CDN）异步完成资源的加载。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://blog-api.unity.com/sites/default/files/2021-08/image11.jpg?imwidth=1920&amp;"
+        data-srcset="https://blog-api.unity.com/sites/default/files/2021-08/image11.jpg?imwidth=1920&amp;, https://blog-api.unity.com/sites/default/files/2021-08/image11.jpg?imwidth=1920&amp; 1.5x, https://blog-api.unity.com/sites/default/files/2021-08/image11.jpg?imwidth=1920&amp; 2x"
+        data-sizes="auto"
+        alt="https://blog-api.unity.com/sites/default/files/2021-08/image11.jpg?imwidth=1920&amp;"
+        title="Editor screenshot" /></p>
+<p>如果把脚本以外的资源（模型、纹理、预制件、音频，甚至整个场景）划分成一个个<a href="https://docs.unity3d.com/cn/current/Manual/AssetBundlesIntro.html" target="_blank" rel="noopener noreffer">AssetBundle</a>，就可以将其作为可下载内容（DLC）分开分发。</p>
+<p>然后，使用Addressables创建一个最小的应用程序，<a href="https://unity.cn/product/cloud-content-delivery" target="_blank" rel="noopener noreffer">Cloud Content Delivery</a>将在游戏进行中完成游戏内容的管理和分发。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://blog-api.unity.com/sites/default/files/2021-08/image16.jpg?imwidth=3840&amp;"
+        data-srcset="https://blog-api.unity.com/sites/default/files/2021-08/image16.jpg?imwidth=3840&amp;, https://blog-api.unity.com/sites/default/files/2021-08/image16.jpg?imwidth=3840&amp; 1.5x, https://blog-api.unity.com/sites/default/files/2021-08/image16.jpg?imwidth=3840&amp; 2x"
+        data-sizes="auto"
+        alt="https://blog-api.unity.com/sites/default/files/2021-08/image16.jpg?imwidth=3840&amp;"
+        title="Screenshot" /></p>
+<p>使用“地址”来加载资源。</p>
+<p>点击<a href="https://unity.cn/projects/addressable-and-cloud-content-delivery" target="_blank" rel="noopener noreffer">此处</a>来详细了解Addressable Asset System是怎样让资源管理更为轻松的。</p>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener noreffer">StackEdit</a>.</p>
+</blockquote></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-10-13</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/unityart/">unityArt</a>,&nbsp;<a href="/tags/unity/">unity</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/untiy3d_unityuido/" class="prev" rel="prev" title="如何优化UnityUI"><i class="fas fa-angle-left fa-fw"></i>如何优化UnityUI</a>
+            <a href="/posts/untiy3d_unityaudiodo/" class="next" rel="next" title="Unity音频优化Tip">Unity音频优化Tip<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">黑色的墨 染上安详</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">iubucuoo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"2ldu0d07pKX43N6f4VDXUy7o-MdYXbMMI","appKey":"j5Y6hsYppxEPjxlFUKPkbyqH","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://2ldu0d07.api.lncldglobal.com","visitor":true}},"search":{"algoliaAppID":"IA0W1IQDAF","algoliaIndex":"index","algoliaSearchKey":"60bd46a3c724efeae0f6a18db8654690","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

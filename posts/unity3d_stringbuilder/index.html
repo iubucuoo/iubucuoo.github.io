@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Unity3D优化_字符串拼接0GC - iubucuoo</title><meta name="Description" content="unity字符串拼接的优化相关的一些探索"><meta property="og:title" content="Unity3D优化_字符串拼接0GC" />
+<meta property="og:description" content="unity字符串拼接的优化相关的一些探索" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.iubucuoo.com/posts/unity3d_stringbuilder/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-11T15:11:39&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-11T15:11:39&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity3D优化_字符串拼接0GC"/>
+<meta name="twitter:description" content="unity字符串拼接的优化相关的一些探索"/>
+<meta name="application-name" content="iubucuoo">
+<meta name="apple-mobile-web-app-title" content="iubucuoo"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://www.iubucuoo.com/posts/unity3d_stringbuilder/" /><link rel="prev" href="http://www.iubucuoo.com/posts/tools_potplayerh265/" /><link rel="next" href="http://www.iubucuoo.com/posts/website_lnmp_wordpress/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unity3D优化_字符串拼接0GC",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.iubucuoo.com\/posts\/unity3d_stringbuilder\/"
+        },"genre": "posts","keywords": "StringBuilder, unity, GC","wordcount":  4356 ,
+        "url": "http:\/\/www.iubucuoo.com\/posts\/unity3d_stringbuilder\/","datePublished": "2021-08-11T15:11:39+08:00","dateModified": "2021-08-11T15:11:39+08:00","publisher": {
+            "@type": "Organization",
+            "name": "iubucuoo"},"author": {
+                "@type": "Person",
+                "name": "iubucuoo"
+            },"description": "unity字符串拼接的优化相关的一些探索"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="所有文章"> 所有文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/tools/"> 工具 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/iubucuoo" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="iubucuoo"><span class="header-title-pre"><i class='fas fa-home fa-fw'></i></span>IUBUCUOO</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="所有文章">所有文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/tools/" title="">工具</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/iubucuoo" title="" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Unity3D优化_字符串拼接0GC</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>iubucuoo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/unity/"><i class="far fa-folder fa-fw"></i>Unity</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-08-11">2021-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4356 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;<span id="/posts/unity3d_stringbuilder/" class="leancloud_visitors" data-flag-title="Unity3D优化_字符串拼接0GC">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符串池缓存机制">字符串池缓存机制</a></li>
+    <li><a href="#string的intern和isinterned">String的Intern和IsInterned</a></li>
+    <li><a href="#如何产生gc">如何产生GC</a></li>
+    <li><a href="#stringbuilder-format">StringBuilder Format()</a></li>
+    <li><a href="#stringbuidler-与-tostring">StringBuidler 与 ToString()</a></li>
+    <li><a href="#tostring">ToString()</a></li>
+    <li><a href="#stringbuilder-到-string-没有垃圾">StringBuilder 到 String 没有垃圾</a></li>
+    <li><a href="#如何优化">如何优化</a></li>
+    <li><a href="#使用-stringbuilder-时避免垃圾">使用 StringBuilder 时避免垃圾</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Unity3D优化_字符串拼接0GC<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"></div>
+        </div>
+    </div>
+<h1 id="unity3d优化_字符串拼接0gc">Unity3D优化_字符串拼接0GC</h1>
+<h2 id="字符串池缓存机制">字符串池缓存机制</h2>
+<ul>
+<li>
+<p>为了避免大型项目中出现巨量的重复字符串，C#底层使用缓存池机制，池中每一个不同内容的字符串存在一个实例。</p>
+</li>
+<li>
+<p>入池的字符串程序运行期间无法清理。所以并非所有的字符串都自动入池，也并非所有的字符串都需要入池。
+所以采用了半自动管理机制，提供了String.Intern和String.IsInterned接口，交给程序员自己维护内部的池。
+所以采用了半自动管理机制，提供了字符串。实习生和字符串。</p>
+</li>
+<li>
+<p>常量(字面值）字符串以及使用&quot;+&ldquo;运算符连接的字面值，会被自动加入到缓存池中，以保证相同内容常量值只存在一个实例。</p>
+</li>
+</ul>
+<h2 id="string的intern和isinterned">String的Intern和IsInterned</h2>
+<ul>
+<li>
+<p>字符串调用string.Intern()时，如果自身字面值对应对象已经在池中，则返回指向池内对象的新引用。如果自身字面值不在池中，则将自身加入池中返回自身引用。</p>
+</li>
+<li>
+<p>字符串调用string.IsInterned()时，如果自身字面值对应对象已在池中，则返回池内对象引用，如果自身字面值不在池中，则返回null</p>
+</li>
+</ul>
+<h2 id="如何产生gc">如何产生GC</h2>
+<ul>
+<li>
+<p>string类提供的拼接，格式化等方法，虽然速度快效率高，但是每次调用时内部都会新建临时变量堆积在内存中，很容易产生GC</p>
+</li>
+<li>
+<p>字符串就是char[]， 长短发生变化必然要重新分配长度，以及拷贝之前的部分，产生GC</p>
+</li>
+<li>
+<p>字符串+=拼接会产生装箱，产生GC</p>
+</li>
+<li>
+<p>Append传入值类型数据，会调用ToString方法，需要new string 然后把char[]拷进去，产生堆内存</p>
+</li>
+<li>
+<p>new StringBuidler 会产生堆内存</p>
+</li>
+<li>
+<p>string.format内部使用的就是StringBuidler，但是new StringBuidler、Append、ToString都会产生堆内存。</p>
+</li>
+</ul>
+<h2 id="stringbuilder-format">StringBuilder Format()</h2>
+<p>StringBuilder 上现有的 AppendFormat() 方法会生成大量垃圾。
+那么<code>.NET</code> 以什么方式产生垃圾呢？嗯，参数类型是&rsquo;object'，由于整数和浮点数经常与 Format() 一起使用，所以你会得到值类型的装箱和拆箱。
+还有在“String::ToCharArray()”和“String::CtorCharArrayStartLength()”中进行的临时分配
+如果你使用三个以上的参数，也会有更多的垃圾；为此，它需要创建一个临时数组。
+看看 StringBuilder 提供的Format()</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">        public StringBuilder AppendFormat(IFormatProvider provider, string format, object arg0);
+        public StringBuilder AppendFormat(IFormatProvider provider, string format, object arg0, object arg1);
+        public StringBuilder AppendFormat(IFormatProvider provider, string format, params object[] args);
+        public StringBuilder AppendFormat(string format, object arg0);
+        public StringBuilder AppendFormat(string format, object arg0, object arg1);
+        public StringBuilder AppendFormat(string format, object arg0, object arg1, object arg2);
+        public StringBuilder AppendFormat(string format, params object[] args);
+        public StringBuilder AppendFormat(IFormatProvider provider, string format, object arg0, object arg1, object arg2);
+</code></pre></div><p>这些中的每一个都使用object参数。如果我想传递整数和浮点数，object参数将受制于值类型的装箱和拆箱。还注意到另外一个数组参数<code>params</code>关键词也会造成临时分配，即使不使用object类型。</p>
+<p>&lsquo;params&rsquo; 关键字实质上将您可能指定的任何参数转换为数组。在这种情况下，整数数组被分配为临时数组，然后被销毁。使用类类型时也会发生同样的事情，而不仅仅是值类型。</p>
+<h2 id="stringbuidler-与-tostring">StringBuidler 与 ToString()</h2>
+<p>C# 中的 StringBuilder 类是处理字符串操作的首选方式,如果你专门使用string类型，则很可能在运行时生成垃圾，但你可以完全避免它。</p>
+<p>例如，避免使用“+”运算符连接字符串，c#中字符串是不可变的，这意味着它们不能被修改。如果你执行这种操作，您的结果字符串将被分配在堆上，使用这种代码很容易产生大量垃圾。</p>
+<p>StringBuilder 允许您使用可变字符串。它提供将其他字符串和其他类型
+连接到可变字符串的功能。StringBuilder 的许多功能是完全无垃圾的。</p>
+<h2 id="tostring">ToString()</h2>
+<p>调用 ToString() 会产生垃圾吗？</p>
+<p>以下是源码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">public override String ToString() {
+    String currentString =  m_StringValue;
+    IntPtr currentThread = m_currentThread;
+    if (currentThread != Thread.InternalGetCurrentThread()) {
+        return String.InternalCopy(currentString);
+    }
+    if ((2 *  currentString.Length) <span class="ni">&amp;lt;</span> currentString.ArrayLength) {
+        return String.InternalCopy(currentString);
+    }
+    currentString.ClearPostNullChar();
+    m_currentThread = IntPtr.Zero;
+    return  currentString;
+}
+</code></pre></div><p>InternalCopy() 是在堆上分配字符串副本并返回它的函数。该函数实际上可以返回内部字符串而无需进行任何复制。特别是第一次调用时，如果字符串使用了至少 50% 的 StringBuilder 容量。将 &rsquo;m_currentThread' 成员设置为零实际上意味着下次在 StringBuilder 上执行任何类型的可变操作时；无论是清除字符串，还是附加到它。StringBuilder 将在堆上分配一个新字符串。StringBuilder 的每个可变方法都会检查“m_currentThread”并确保 StringBuilder 拥有特定的字符串。ToString() 的工作方式是有效地放弃该字符串的所有权，并将在下一个可变操作中从一个新的字符串开始。</p>
+<p>这个线程注释背后的原因，以及保持 ToString() 返回的 String 完全不可变，是为了保持 StringBuilder 线程安全。</p>
+<p>进行复制的另一个原因是用户对内存的使用效率低下。如果我们只使用 StringBuilder 容量的一小部分，.NET 作者认为返回副本而不是引用完整的大字符串更有效。</p>
+<p>如果我想重新使用 StringBuilder 对象，我可能会避免在第一次调用时生成字符串的副本，但是如果我重用 StringBuilder，当我调用它的下一个可变方法时，它会在堆上为我分配一个新字符串。</p>
+<h2 id="stringbuilder-到-string-没有垃圾">StringBuilder 到 String 没有垃圾</h2>
+<p>可以做到的是直接访问 StringBuilder 使用的字符串，下面的一个方法它做了一些.net作者不希望你做的事情</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">string my_string = (string)my_stringbuilder.GetType().GetField(
+    &#34;m_StringValue&#34;,
+    System.Reflection.BindingFlags.NonPublic |
+    System.Reflection.BindingFlags.Instance ).GetValue( my_stringbuilder );
+</code></pre></div><p>该方法并不太好，总归可以去实现。反射再性能方便不太好，所以建议只为您将使用的StringBuilder抓取一次内部字符串。将它作为类的成员或其他东西藏起来，然后您就可以将字符串传递给您希望的任何函数。现在我们不再担心 ToString() 为我们生成垃圾
+示例代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">StringBuilder my_stringbuilder = new StringBuilder( 32, 32 );
+string my_string = (string)my_stringbuilder.GetType().GetField(
+	&#34;m_StringValue&#34;, BindingFlags.NonPublic | BindingFlags.Instance )
+	.GetValue( my_stringbuilder );
+
+my_stringbuilder.Append( &#34;This &#34; );
+my_stringbuilder.Append( &#34;Is &#34; );
+my_stringbuilder.Append( &#34;A &#34; );
+my_stringbuilder.Append( &#34;Test!&#34; );
+
+// my string will be &#34;This Is A Test!&#34;
+Console.Write( my_string );
+
+// This second append would have resulted in a new heap allocation
+// if I&#39;d used ToString() above.
+my_stringbuilder.Append( &#34; Yay!&#34; );
+Console.Write( my_string );
+</code></pre></div><p>建议使用两个整数参数构造函数创建 StringBuilder 对象。除了预分配字符串外，您还将设置容量上限：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">// Creates an empty StringBuilder with a minimum capacity of capacity
+// and a maximum capacity of maxCapacity.
+public StringBuilder(int capacity, int maxCapacity)
+</code></pre></div><p>这意味着它的大小永远不会增加，也不会在最初构建后进行更多的堆分配。如果发生这种情况，您抓取的字符串对象将不再链接到 StringBuilder。您需要重做反射调用以获取 StringBuilder 拥有的新字符串。</p>
+<p>因此，通过使用该构造函数，这意味着如果您获取内部字符串，则可以保证永远保留对 StringBuilder 可变字符串的引用。不过，这里的一个关键例外是，如果您在另一个线程上使用 StringBuilder。在这种情况下，您将遇到与以前相同的问题。</p>
+<h2 id="如何优化">如何优化</h2>
+<ol>
+<li>
+<p>例：</p>
+<pre><code>int a =100;
+string b = a+&quot;&quot;;
+</code></pre><p><code>a+&quot;&quot;</code>会产生一次装箱操作，应该改成<code>a.ToString();</code></p>
+</li>
+<li>
+<p>少用string.format，提前缓存共享的StringBuidler对象，避免用的时候产生堆内存。</p>
+</li>
+<li>
+<p>提前定义好 0 – 9 之间的字符数组，如果传入值类型数据，从高位依次除以10算出每一位的数，然后再去预先声明的0-9字符数组中找对应的char，这样就就不会产生装箱GC了。</p>
+</li>
+<li>
+<p>如果可以提前确定字符串的长度，可以提前声明一个固定长度的StringBuilder，通过反射取出来内部的_str，这样就可以避免最后的ToString产生的堆内存了。由于_str内容可能无法擦掉之前的所以需要调用GarbageFreeClear();方法。</p>
+</li>
+</ol>
+<h2 id="使用-stringbuilder-时避免垃圾">使用 StringBuilder 时避免垃圾</h2>
+<p><a href="/posts/unity3d_stringbuilder/StringBuilderExtFormat.zip" rel="">StringBuilderExtFormat.zip</a></p>
+<p>无GC代码示例：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Markdown" data-lang="Markdown">using System;
+using System.Text;
+using UnityEngine;
+ 
+public static class StringBuilderExtensions
+{
+    // These digits are here in a static array to support hex with simple, easily-understandable code. 
+    // Since A-Z don&#39;t sit next to 0-9 in the ascii table.
+    private static readonly char[] ms_digits = new char[] { &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39; };
+ 
+    private static readonly uint ms_default_decimal_places = 5; //<span class="p">&lt;</span> <span class="nt">Matches</span> <span class="na">standard</span> <span class="err">.</span><span class="na">NET</span> <span class="na">formatting</span> <span class="na">dp</span><span class="err">&#39;</span><span class="na">s</span>
+    <span class="na">private</span> <span class="na">static</span> <span class="na">readonly</span> <span class="na">char</span> <span class="na">ms_default_pad_char </span><span class="o">=</span> <span class="s">&#39;0&#39;</span><span class="err">;</span>
+ 
+    <span class="err">//!</span> <span class="na">Convert</span> <span class="na">a</span> <span class="na">given</span> <span class="na">unsigned</span> <span class="na">integer</span> <span class="na">value</span> <span class="na">to</span> <span class="na">a</span> <span class="na">string</span> <span class="na">and</span> <span class="na">concatenate</span> <span class="na">onto</span> <span class="na">the</span> <span class="na">stringbuilder</span><span class="err">.</span> <span class="na">Any</span> <span class="na">base</span> <span class="na">value</span> <span class="na">allowed</span><span class="err">.</span>
+    <span class="na">public</span> <span class="na">static</span> <span class="na">StringBuilder</span> <span class="na">Concat</span><span class="err">(</span><span class="na">this</span> <span class="na">StringBuilder</span> <span class="na">string_builder</span><span class="err">,</span> <span class="na">uint</span> <span class="na">uint_val</span><span class="err">,</span> <span class="na">uint</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">char</span> <span class="na">pad_char</span><span class="err">,</span> <span class="na">uint</span> <span class="na">base_val</span><span class="err">)</span>
+    <span class="err">{</span>
+        <span class="na">Debug</span><span class="err">.</span><span class="na">Assert</span><span class="err">(</span><span class="na">pad_amount</span> <span class="p">&gt;</span>= 0);
+        Debug.Assert(base_val &gt; 0 <span class="err">&amp;&amp;</span> base_val <span class="err">&lt;</span>= 16);
+ 
+        // Calculate length of integer when written out
+        uint length = 0;
+        uint length_calc = uint_val;
+ 
+        do
+        {
+            length_calc /= base_val;
+            length++;
+        }
+        while (length_calc &gt; 0);
+ 
+        // Pad out space for writing.
+        string_builder.Append(pad_char, (int)Math.Max(pad_amount, length));
+ 
+        int strpos = string_builder.Length;
+ 
+        // We&#39;re writing backwards, one character at a time.
+        while (length &gt; 0)
+        {
+            strpos--;
+ 
+            // Lookup from static char array, to cover hex values too
+            string_builder[strpos] = ms_digits[uint_val % base_val];
+ 
+            uint_val /= base_val;
+            length--;
+        }
+ 
+        return string_builder;
+    }
+ 
+    //! Convert a given unsigned integer value to a string and concatenate onto the stringbuilder. Assume no padding and base ten.
+    public static StringBuilder Concat(this StringBuilder string_builder, uint uint_val)
+    {
+        string_builder.Concat(uint_val, 0, ms_default_pad_char, 10);
+        return string_builder;
+    }
+ 
+    //! Convert a given unsigned integer value to a string and concatenate onto the stringbuilder. Assume base ten.
+    public static StringBuilder Concat(this StringBuilder string_builder, uint uint_val, uint pad_amount)
+    {
+        string_builder.Concat(uint_val, pad_amount, ms_default_pad_char, 10);
+        return string_builder;
+    }
+ 
+    //! Convert a given unsigned integer value to a string and concatenate onto the stringbuilder. Assume base ten.
+    public static StringBuilder Concat(this StringBuilder string_builder, uint uint_val, uint pad_amount, char pad_char)
+    {
+        string_builder.Concat(uint_val, pad_amount, pad_char, 10);
+        return string_builder;
+    }
+ 
+    //! Convert a given signed integer value to a string and concatenate onto the stringbuilder. Any base value allowed.
+    public static StringBuilder Concat(this StringBuilder string_builder, int int_val, uint pad_amount, char pad_char, uint base_val)
+    {
+        Debug.Assert(pad_amount &gt;= 0);
+        Debug.Assert(base_val &gt; 0 <span class="err">&amp;&amp;</span> base_val <span class="err">&lt;</span>= 16);
+ 
+        // Deal with negative numbers
+        if (int_val <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span>
+        <span class="err">{</span>
+            <span class="na">string_builder</span><span class="err">.</span><span class="na">Append</span><span class="err">(&#39;</span><span class="na">-</span><span class="err">&#39;);</span>
+            <span class="na">uint</span> <span class="na">uint_val </span><span class="o">=</span> <span class="s">uint.MaxValue</span> <span class="na">-</span> <span class="err">((</span><span class="na">uint</span><span class="err">)</span><span class="na">int_val</span><span class="err">)</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="err">//&lt;</span> <span class="na">This</span> <span class="na">is</span> <span class="na">to</span> <span class="na">deal</span> <span class="na">with</span> <span class="na">Int32</span><span class="err">.</span><span class="na">MinValue</span>
+            <span class="na">string_builder</span><span class="err">.</span><span class="na">Concat</span><span class="err">(</span><span class="na">uint_val</span><span class="err">,</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">pad_char</span><span class="err">,</span> <span class="na">base_val</span><span class="err">);</span>
+        <span class="err">}</span>
+        <span class="na">else</span>
+        <span class="err">{</span>
+            <span class="na">string_builder</span><span class="err">.</span><span class="na">Concat</span><span class="err">((</span><span class="na">uint</span><span class="err">)</span><span class="na">int_val</span><span class="err">,</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">pad_char</span><span class="err">,</span> <span class="na">base_val</span><span class="err">);</span>
+        <span class="err">}</span>
+ 
+        <span class="na">return</span> <span class="na">string_builder</span><span class="err">;</span>
+    <span class="err">}</span>
+ 
+    <span class="err">//!</span> <span class="na">Convert</span> <span class="na">a</span> <span class="na">given</span> <span class="na">signed</span> <span class="na">integer</span> <span class="na">value</span> <span class="na">to</span> <span class="na">a</span> <span class="na">string</span> <span class="na">and</span> <span class="na">concatenate</span> <span class="na">onto</span> <span class="na">the</span> <span class="na">stringbuilder</span><span class="err">.</span> <span class="na">Assume</span> <span class="na">no</span> <span class="na">padding</span> <span class="na">and</span> <span class="na">base</span> <span class="na">ten</span><span class="err">.</span>
+    <span class="na">public</span> <span class="na">static</span> <span class="na">StringBuilder</span> <span class="na">Concat</span><span class="err">(</span><span class="na">this</span> <span class="na">StringBuilder</span> <span class="na">string_builder</span><span class="err">,</span> <span class="na">int</span> <span class="na">int_val</span><span class="err">)</span>
+    <span class="err">{</span>
+        <span class="na">string_builder</span><span class="err">.</span><span class="na">Concat</span><span class="err">(</span><span class="na">int_val</span><span class="err">,</span> <span class="na">0</span><span class="err">,</span> <span class="na">ms_default_pad_char</span><span class="err">,</span> <span class="na">10</span><span class="err">);</span>
+        <span class="na">return</span> <span class="na">string_builder</span><span class="err">;</span>
+    <span class="err">}</span>
+ 
+    <span class="err">//!</span> <span class="na">Convert</span> <span class="na">a</span> <span class="na">given</span> <span class="na">signed</span> <span class="na">integer</span> <span class="na">value</span> <span class="na">to</span> <span class="na">a</span> <span class="na">string</span> <span class="na">and</span> <span class="na">concatenate</span> <span class="na">onto</span> <span class="na">the</span> <span class="na">stringbuilder</span><span class="err">.</span> <span class="na">Assume</span> <span class="na">base</span> <span class="na">ten</span><span class="err">.</span>
+    <span class="na">public</span> <span class="na">static</span> <span class="na">StringBuilder</span> <span class="na">Concat</span><span class="err">(</span><span class="na">this</span> <span class="na">StringBuilder</span> <span class="na">string_builder</span><span class="err">,</span> <span class="na">int</span> <span class="na">int_val</span><span class="err">,</span> <span class="na">uint</span> <span class="na">pad_amount</span><span class="err">)</span>
+    <span class="err">{</span>
+        <span class="na">string_builder</span><span class="err">.</span><span class="na">Concat</span><span class="err">(</span><span class="na">int_val</span><span class="err">,</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">ms_default_pad_char</span><span class="err">,</span> <span class="na">10</span><span class="err">);</span>
+        <span class="na">return</span> <span class="na">string_builder</span><span class="err">;</span>
+    <span class="err">}</span>
+ 
+    <span class="err">//!</span> <span class="na">Convert</span> <span class="na">a</span> <span class="na">given</span> <span class="na">signed</span> <span class="na">integer</span> <span class="na">value</span> <span class="na">to</span> <span class="na">a</span> <span class="na">string</span> <span class="na">and</span> <span class="na">concatenate</span> <span class="na">onto</span> <span class="na">the</span> <span class="na">stringbuilder</span><span class="err">.</span> <span class="na">Assume</span> <span class="na">base</span> <span class="na">ten</span><span class="err">.</span>
+    <span class="na">public</span> <span class="na">static</span> <span class="na">StringBuilder</span> <span class="na">Concat</span><span class="err">(</span><span class="na">this</span> <span class="na">StringBuilder</span> <span class="na">string_builder</span><span class="err">,</span> <span class="na">int</span> <span class="na">int_val</span><span class="err">,</span> <span class="na">uint</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">char</span> <span class="na">pad_char</span><span class="err">)</span>
+    <span class="err">{</span>
+        <span class="na">string_builder</span><span class="err">.</span><span class="na">Concat</span><span class="err">(</span><span class="na">int_val</span><span class="err">,</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">pad_char</span><span class="err">,</span> <span class="na">10</span><span class="err">);</span>
+        <span class="na">return</span> <span class="na">string_builder</span><span class="err">;</span>
+    <span class="err">}</span>
+ 
+    <span class="err">//!</span> <span class="na">Convert</span> <span class="na">a</span> <span class="na">given</span> <span class="na">float</span> <span class="na">value</span> <span class="na">to</span> <span class="na">a</span> <span class="na">string</span> <span class="na">and</span> <span class="na">concatenate</span> <span class="na">onto</span> <span class="na">the</span> <span class="na">stringbuilder</span>
+    <span class="na">public</span> <span class="na">static</span> <span class="na">StringBuilder</span> <span class="na">Concat</span><span class="err">(</span><span class="na">this</span> <span class="na">StringBuilder</span> <span class="na">string_builder</span><span class="err">,</span> <span class="na">float</span> <span class="na">float_val</span><span class="err">,</span> <span class="na">uint</span> <span class="na">decimal_places</span><span class="err">,</span> <span class="na">uint</span> <span class="na">pad_amount</span><span class="err">,</span> <span class="na">char</span> <span class="na">pad_char</span><span class="err">)</span>
+    <span class="err">{</span>
+        <span class="na">Debug</span><span class="err">.</span><span class="na">Assert</span><span class="err">(</span><span class="na">pad_amount</span> <span class="p">&gt;</span>= 0);
+ 
+        if (decimal_places == 0)
+        {
+            // No decimal places, just round up and print it as an int
+ 
+            // Agh, Math.Floor() just works on doubles/decimals. Don&#39;t want to cast! Let&#39;s do this the old-fashioned way.
+            int int_val;
+            if (float_val &gt;= 0.0f)
+            {
+                // Round up
+                int_val = (int)(float_val + 0.5f);
+            }
+            else
+            {
+                // Round down for negative numbers
+                int_val = (int)(float_val - 0.5f);
+            }
+ 
+            string_builder.Concat(int_val, pad_amount, pad_char, 10);
+        }
+        else
+        {
+            int int_part = (int)float_val;
+ 
+            // First part is easy, just cast to an integer
+            string_builder.Concat(int_part, pad_amount, pad_char, 10);
+ 
+            // Decimal point
+            string_builder.Append(&#39;.&#39;);
+ 
+            // Work out remainder we need to print after the d.p.
+            float remainder = Math.Abs(float_val - int_part);
+ 
+            // Multiply up to become an int that we can print
+            do
+            {
+                remainder *= 10;
+                decimal_places--;
+            }
+            while (decimal_places &gt; 0);
+ 
+            // Round up. It&#39;s guaranteed to be a positive number, so no extra work required here.
+            remainder += 0.5f;
+ 
+            // All done, print that as an int!
+            string_builder.Concat((uint)remainder, 0, &#39;0&#39;, 10);
+        }
+        return string_builder;
+    }
+ 
+    //! Convert a given float value to a string and concatenate onto the stringbuilder. Assumes five decimal places, and no padding.
+    public static StringBuilder Concat(this StringBuilder string_builder, float float_val)
+    {
+        string_builder.Concat(float_val, ms_default_decimal_places, 0, ms_default_pad_char);
+        return string_builder;
+    }
+ 
+    //! Convert a given float value to a string and concatenate onto the stringbuilder. Assumes no padding.
+    public static StringBuilder Concat(this StringBuilder string_builder, float float_val, uint decimal_places)
+    {
+        string_builder.Concat(float_val, decimal_places, 0, ms_default_pad_char);
+        return string_builder;
+    }
+ 
+    //! Convert a given float value to a string and concatenate onto the stringbuilder.
+    public static StringBuilder Concat(this StringBuilder string_builder, float float_val, uint decimal_places, uint pad_amount)
+    {
+        string_builder.Concat(float_val, decimal_places, pad_amount, ms_default_pad_char);
+        return string_builder;
+    }
+ 
+    //! Concatenate a formatted string with arguments
+    public static StringBuilder ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="p">&gt;</span>(this StringBuilder string_builder, String format_string, A arg1)
+        where A : IConvertible
+    {
+        return string_builder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, 0, 0, 0);
+    }
+ 
+    //! Concatenate a formatted string with arguments
+    public static StringBuilder ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="p">&gt;</span>(this StringBuilder string_builder, String format_string, A arg1, B arg2)
+        where A : IConvertible
+        where B : IConvertible
+    {
+        return string_builder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, arg2, 0, 0);
+    }
+ 
+    //! Concatenate a formatted string with arguments
+    public static StringBuilder ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="p">&gt;</span>(this StringBuilder string_builder, String format_string, A arg1, B arg2, C arg3)
+        where A : IConvertible
+        where B : IConvertible
+        where C : IConvertible
+    {
+        return string_builder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, arg2, arg3, 0);
+    }
+ 
+    //! Concatenate a formatted string with arguments
+    public static StringBuilder ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="err">,</span> <span class="na">D</span><span class="p">&gt;</span>(this StringBuilder string_builder, String format_string, A arg1, B arg2, C arg3, D arg4)
+        where A : IConvertible
+        where B : IConvertible
+        where C : IConvertible
+        where D : IConvertible
+    {
+        int verbatim_range_start = 0;
+ 
+        for (int index = 0; index <span class="p">&lt;</span> <span class="nt">format_string.Length</span><span class="err">;</span> <span class="na">index</span><span class="err">++)</span>
+        <span class="err">{</span>
+            <span class="na">if</span> <span class="err">(</span><span class="na">format_string</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;{&#39;)</span>
+            <span class="err">{</span>
+                <span class="err">//</span> <span class="na">Formatting</span> <span class="na">bit</span> <span class="na">now</span><span class="err">,</span> <span class="na">so</span> <span class="na">make</span> <span class="na">sure</span> <span class="na">the</span> <span class="na">last</span> <span class="na">block</span> <span class="na">of</span> <span class="na">the</span> <span class="na">string</span> <span class="na">is</span> <span class="na">written</span> <span class="na">out</span> <span class="na">verbatim</span><span class="err">.</span>
+                <span class="na">if</span> <span class="err">(</span><span class="na">verbatim_range_start</span> <span class="err">&lt;</span> <span class="na">index</span><span class="err">)</span>
+                <span class="err">{</span>
+                    <span class="err">//</span> <span class="na">Write</span> <span class="na">out</span> <span class="na">unformatted</span> <span class="na">string</span> <span class="na">portion</span>
+                    <span class="na">string_builder</span><span class="err">.</span><span class="na">Append</span><span class="err">(</span><span class="na">format_string</span><span class="err">,</span> <span class="na">verbatim_range_start</span><span class="err">,</span> <span class="na">index</span> <span class="na">-</span> <span class="na">verbatim_range_start</span><span class="err">);</span>
+                <span class="err">}</span>
+ 
+                <span class="na">uint</span> <span class="na">base_value </span><span class="o">=</span> <span class="s">10;</span>
+                <span class="na">uint</span> <span class="na">padding </span><span class="o">=</span> <span class="s">0;</span>
+                <span class="na">uint</span> <span class="na">decimal_places </span><span class="o">=</span> <span class="s">5;</span> <span class="err">//</span> <span class="na">Default</span> <span class="na">decimal</span> <span class="na">places</span> <span class="na">in</span> <span class="err">.</span><span class="na">NET</span> <span class="na">libs</span>
+ 
+                <span class="na">index</span><span class="err">++;</span>
+                <span class="na">char</span> <span class="na">format_char </span><span class="o">=</span> <span class="s">format_string[index];</span>
+                <span class="na">if</span> <span class="err">(</span><span class="na">format_char </span><span class="o">=</span><span class="s">=</span> <span class="err">&#39;{&#39;)</span>
+                <span class="err">{</span>
+                    <span class="na">string_builder</span><span class="err">.</span><span class="na">Append</span><span class="err">(&#39;{&#39;);</span>
+                    <span class="na">index</span><span class="err">++;</span>
+                <span class="err">}</span>
+                <span class="na">else</span>
+                <span class="err">{</span>
+                    <span class="na">index</span><span class="err">++;</span>
+ 
+                    <span class="na">if</span> <span class="err">(</span><span class="na">format_string</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">:</span><span class="err">&#39;)</span>
+                    <span class="err">{</span>
+                        <span class="err">//</span> <span class="na">Extra</span> <span class="na">formatting</span><span class="err">.</span> <span class="na">This</span> <span class="na">is</span> <span class="na">a</span> <span class="na">crude</span> <span class="na">first</span> <span class="na">pass</span> <span class="na">proof-of-concept</span><span class="err">.</span> <span class="na">It</span><span class="err">&#39;</span><span class="na">s</span> <span class="na">not</span> <span class="na">meant</span> <span class="na">to</span> <span class="na">cover</span>
+                        <span class="err">//</span> <span class="na">comprehensively</span> <span class="na">what</span> <span class="na">the</span> <span class="err">.</span><span class="na">NET</span> <span class="na">standard</span> <span class="na">library</span> <span class="na">Format</span><span class="err">()</span> <span class="na">can</span> <span class="na">do</span><span class="err">.</span>
+                        <span class="na">index</span><span class="err">++;</span>
+ 
+                        <span class="err">//</span> <span class="na">Deal</span> <span class="na">with</span> <span class="na">padding</span>
+                        <span class="na">while</span> <span class="err">(</span><span class="na">format_string</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;)</span>
+                        <span class="err">{</span>
+                            <span class="na">index</span><span class="err">++;</span>
+                            <span class="na">padding</span><span class="err">++;</span>
+                        <span class="err">}</span>
+ 
+                        <span class="na">if</span> <span class="err">(</span><span class="na">format_string</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">X</span><span class="err">&#39;)</span>
+                        <span class="err">{</span>
+                            <span class="na">index</span><span class="err">++;</span>
+ 
+                            <span class="err">//</span> <span class="na">Print</span> <span class="na">in</span> <span class="na">hex</span>
+                            <span class="na">base_value </span><span class="o">=</span> <span class="s">16;</span>
+ 
+                            <span class="err">//</span> <span class="na">Specify</span> <span class="na">amount</span> <span class="na">of</span> <span class="na">padding</span> <span class="err">(</span> <span class="err">&#34;{</span><span class="na">0:X8</span><span class="err">}&#34;</span> <span class="na">for</span> <span class="na">example</span> <span class="na">pads</span> <span class="na">hex</span> <span class="na">to</span> <span class="na">eight</span> <span class="na">characters</span>
+                            <span class="na">if</span> <span class="err">((</span><span class="na">format_string</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="p">&gt;</span>= &#39;0&#39;) <span class="err">&amp;&amp;</span> (format_string[index] <span class="err">&lt;</span>= &#39;9&#39;))
+                            {
+                                padding = (uint)(format_string[index] - &#39;0&#39;);
+                                index++;
+                            }
+                        }
+                        else if (format_string[index] == &#39;.&#39;)
+                        {
+                            index++;
+ 
+                            // Specify number of decimal places
+                            decimal_places = 0;
+ 
+                            while (format_string[index] == &#39;0&#39;)
+                            {
+                                index++;
+                                decimal_places++;
+                            }
+                        }
+                    }
+ 
+ 
+                    // Scan through to end bracket
+                    while (format_string[index] != &#39;}&#39;)
+                    {
+                        index++;
+                    }
+ 
+                    // Have any extended settings now, so just print out the particular argument they wanted
+                    switch (format_char)
+                    {
+                        case &#39;0&#39;: string_builder.ConcatFormatValue<span class="p">&lt;</span><span class="nt">A</span><span class="p">&gt;</span>(arg1, padding, base_value, decimal_places); break;
+                        case &#39;1&#39;: string_builder.ConcatFormatValue<span class="p">&lt;</span><span class="nt">B</span><span class="p">&gt;</span>(arg2, padding, base_value, decimal_places); break;
+                        case &#39;2&#39;: string_builder.ConcatFormatValue<span class="p">&lt;</span><span class="nt">C</span><span class="p">&gt;</span>(arg3, padding, base_value, decimal_places); break;
+                        case &#39;3&#39;: string_builder.ConcatFormatValue<span class="p">&lt;</span><span class="nt">D</span><span class="p">&gt;</span>(arg4, padding, base_value, decimal_places); break;
+                        default: Debug.Assert(false, &#34;Invalid parameter index&#34;); break;
+                    }
+                }
+ 
+                // Update the verbatim range, start of a new section now
+                verbatim_range_start = (index + 1);
+            }
+        }
+ 
+        // Anything verbatim to write out?
+        if (verbatim_range_start <span class="p">&lt;</span> <span class="nt">format_string.Length</span><span class="err">)</span>
+        <span class="err">{</span>
+            <span class="err">//</span> <span class="na">Write</span> <span class="na">out</span> <span class="na">unformatted</span> <span class="na">string</span> <span class="na">portion</span>
+            <span class="na">string_builder</span><span class="err">.</span><span class="na">Append</span><span class="err">(</span><span class="na">format_string</span><span class="err">,</span> <span class="na">verbatim_range_start</span><span class="err">,</span> <span class="na">format_string</span><span class="err">.</span><span class="na">Length</span> <span class="na">-</span> <span class="na">verbatim_range_start</span><span class="err">);</span>
+        <span class="err">}</span>
+ 
+        <span class="na">return</span> <span class="na">string_builder</span><span class="err">;</span>
+    <span class="err">}</span>
+ 
+    <span class="err">//!</span> <span class="na">The</span> <span class="na">worker</span> <span class="na">method</span><span class="err">.</span> <span class="na">This</span> <span class="na">does</span> <span class="na">a</span> <span class="na">garbage-free</span> <span class="na">conversion</span> <span class="na">of</span> <span class="na">a</span> <span class="na">generic</span> <span class="na">type</span><span class="err">,</span> <span class="na">and</span> <span class="na">uses</span> <span class="na">the</span> <span class="na">garbage-free</span> <span class="na">Concat</span><span class="err">()</span> <span class="na">to</span> <span class="na">add</span> <span class="na">to</span> <span class="na">the</span> <span class="na">stringbuilder</span>
+    <span class="na">private</span> <span class="na">static</span> <span class="na">void</span> <span class="na">ConcatFormatValue</span><span class="err">&lt;</span><span class="na">T</span><span class="p">&gt;</span>(this StringBuilder string_builder, T arg, uint padding, uint base_value, uint decimal_places) where T : IConvertible
+    {
+        switch (arg.GetTypeCode())
+        {
+            case System.TypeCode.UInt32:
+                {
+                    string_builder.Concat(arg.ToUInt32(System.Globalization.NumberFormatInfo.CurrentInfo), padding, &#39;0&#39;, base_value);
+                    break;
+                }
+ 
+            case System.TypeCode.Int32:
+                {
+                    string_builder.Concat(arg.ToInt32(System.Globalization.NumberFormatInfo.CurrentInfo), padding, &#39;0&#39;, base_value);
+                    break;
+                }
+ 
+            case System.TypeCode.Single:
+                {
+                    string_builder.Concat(arg.ToSingle(System.Globalization.NumberFormatInfo.CurrentInfo), decimal_places, padding, &#39;0&#39;);
+                    break;
+                }
+ 
+            case System.TypeCode.String:
+                {
+                    string_builder.Append(Convert.ToString(arg));
+                    break;
+                }
+ 
+            default:
+                {
+                    Debug.Assert(false, &#34;Unknown parameter type&#34;);
+                    break;
+                }
+        }
+    }
+ 
+    public static void Empty(this StringBuilder string_builder)
+    {
+        string_builder.Remove(0, string_builder.Length);
+    }
+ 
+ 
+    public static string GetGarbageFreeString(this StringBuilder string_builder)
+    {
+        return (string)string_builder.GetType().GetField(&#34;_str&#34;, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(string_builder);
+    }
+ 
+    public static void GarbageFreeClear(this StringBuilder string_builder)
+    {
+        string_builder.Length = 0;
+        string_builder.Append(&#39; &#39;, string_builder.Capacity);
+        string_builder.Length = 0;
+    }
+}
+public static class StrExt
+{
+    //只允许拼接50个字符串
+    private static StringBuilder s_StringBuilder = new StringBuilder(50, 50);
+ 
+    public static string Format<span class="p">&lt;</span><span class="nt">A</span><span class="p">&gt;</span>(String format_string, A arg1)
+            where A : IConvertible
+    {
+        s_StringBuilder.Empty();
+        return s_StringBuilder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, 0, 0, 0).ToString();
+    }
+ 
+    public static string Format<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="p">&gt;</span>(String format_string, A arg1, B arg2)
+        where A : IConvertible
+        where B : IConvertible
+    {
+        s_StringBuilder.Empty();
+        return s_StringBuilder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, arg2, 0, 0).ToString();
+    }
+ 
+    public static string Format<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="p">&gt;</span>(String format_string, A arg1, B arg2, C arg3)
+        where A : IConvertible
+        where B : IConvertible
+        where C : IConvertible
+    {
+        s_StringBuilder.Empty();
+        return s_StringBuilder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(format_string, arg1, arg2, arg3, 0).ToString();
+    }
+ 
+    public static string Format<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="err">,</span> <span class="na">D</span><span class="p">&gt;</span>(String format_string, A arg1, B arg2, C arg3, D arg4)
+        where A : IConvertible
+        where B : IConvertible
+        where C : IConvertible
+        where D : IConvertible
+    {
+        s_StringBuilder.Empty();
+        return s_StringBuilder.ConcatFormat<span class="p">&lt;</span><span class="nt">A</span><span class="err">,</span> <span class="na">B</span><span class="err">,</span> <span class="na">C</span><span class="err">,</span> <span class="na">D</span><span class="p">&gt;</span>(format_string, arg1, arg2, arg3, arg4).ToString();
+    }
+}
+ 
+</code></pre></div><p>参考文章<a href="https://www.gavpugh.com/xnac-articles/" target="_blank" rel="noopener noreffer">StringBuilder and String Garbage</a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-08-11</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/stringbuilder/">StringBuilder</a>,&nbsp;<a href="/tags/unity/">unity</a>,&nbsp;<a href="/tags/gc/">GC</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tools_potplayerh265/" class="prev" rel="prev" title="PotPlayer不支持S/W HEVC(H.265)解码"><i class="fas fa-angle-left fa-fw"></i>PotPlayer不支持S/W HEVC(H.265)解码</a>
+            <a href="/posts/website_lnmp_wordpress/" class="next" rel="next" title="手动安装LNMP与wordpress">手动安装LNMP与wordpress<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">黑色的墨 染上安详</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">iubucuoo</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"2ldu0d07pKX43N6f4VDXUy7o-MdYXbMMI","appKey":"j5Y6hsYppxEPjxlFUKPkbyqH","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://2ldu0d07.api.lncldglobal.com","visitor":true}},"search":{"algoliaAppID":"IA0W1IQDAF","algoliaIndex":"index","algoliaSearchKey":"60bd46a3c724efeae0f6a18db8654690","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

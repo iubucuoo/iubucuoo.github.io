@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>学习实践 - 分类 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/categories/study/</link>
+        <description>学习实践 - 分类 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 06 Aug 2021 17:28:12 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/categories/study/" rel="self" type="application/rss+xml" /><item>
+    <title>二进制数与位运算</title>
+    <link>http://www.iubucuoo.com/posts/study_binary/</link>
+    <pubDate>Fri, 06 Aug 2021 17:28:12 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/study_binary/</guid>
+    <description><![CDATA[二进制数复习指南，回顾二进制的计算与使用]]></description>
+</item></channel>
+</rss>

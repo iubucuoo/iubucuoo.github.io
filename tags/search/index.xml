@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>search - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/search/</link>
+        <description>search - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 20 Jul 2021 22:56:33 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/search/" rel="self" type="application/rss+xml" /><item>
+    <title>Google搜索小技巧</title>
+    <link>http://www.iubucuoo.com/posts/tools_googlesearch/</link>
+    <pubDate>Tue, 20 Jul 2021 22:56:33 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_googlesearch/</guid>
+    <description><![CDATA[google搜索技巧的一些记录]]></description>
+</item></channel>
+</rss>

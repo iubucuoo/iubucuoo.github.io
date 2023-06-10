@@ -1,0 +1,35 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>善用工具 - 分类 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/categories/tools/</link>
+        <description>善用工具 - 分类 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 07 Aug 2021 11:19:30 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/categories/tools/" rel="self" type="application/rss+xml" /><item>
+    <title>PotPlayer不支持S/W HEVC(H.265)解码</title>
+    <link>http://www.iubucuoo.com/posts/tools_potplayerh265/</link>
+    <pubDate>Sat, 07 Aug 2021 11:19:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_potplayerh265/</guid>
+    <description><![CDATA[PotPlayer不支持S/W HEVC(H.265)格式的视频播放解决方案]]></description>
+</item><item>
+    <title>youtube-dl下载利器</title>
+    <link>http://www.iubucuoo.com/posts/tools_youtube-dl/</link>
+    <pubDate>Fri, 06 Aug 2021 10:50:15 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_youtube-dl/</guid>
+    <description><![CDATA[通过网站链接下载网站内的视频到本地磁盘]]></description>
+</item><item>
+    <title>python升级pip</title>
+    <link>http://www.iubucuoo.com/posts/tools_pythonuppip/</link>
+    <pubDate>Fri, 06 Aug 2021 10:45:25 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_pythonuppip/</guid>
+    <description><![CDATA[python的pip版本过低导致使用异常]]></description>
+</item><item>
+    <title>Google搜索小技巧</title>
+    <link>http://www.iubucuoo.com/posts/tools_googlesearch/</link>
+    <pubDate>Tue, 20 Jul 2021 22:56:33 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/tools_googlesearch/</guid>
+    <description><![CDATA[google搜索技巧的一些记录]]></description>
+</item></channel>
+</rss>

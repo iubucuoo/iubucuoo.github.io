@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Profiler - 标签 - iubucuoo</title>
+        <link>http://www.iubucuoo.com/tags/profiler/</link>
+        <description>Profiler - 标签 - iubucuoo</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 18 Oct 2022 15:22:35 &#43;0800</lastBuildDate><atom:link href="http://www.iubucuoo.com/tags/profiler/" rel="self" type="application/rss+xml" /><item>
+    <title>Unity游戏性能分析指南</title>
+    <link>http://www.iubucuoo.com/posts/unity3d_profiler/</link>
+    <pubDate>Tue, 18 Oct 2022 15:22:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://www.iubucuoo.com/posts/unity3d_profiler/</guid>
+    <description><![CDATA[对应用程序进行性能分析、管理其内存以及彻底优化其功耗]]></description>
+</item></channel>
+</rss>
