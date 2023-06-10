@@ -78,7 +78,7 @@ StackEdit markdown编辑器
 LoveIt主题参考
 
 LoveIt主题原文参考
-<img align="center" style="background: none;" src="https://raw.githubusercontent.com/simonguo/simonguo.github.io/output/github-contribution-grid-snake-dark.svg">
+<img align="center" style="background: none;" src="https://raw.githubusercontent.com/iubucuoo/iubucuoo.github.io/output/github-contribution-grid-snake-dark.svg">
 
 <style>
   @import url('./styles.css?v=20220712.2');
